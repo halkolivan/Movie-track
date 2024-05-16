@@ -1,0 +1,149 @@
+a {
+  text-decoration: none;
+}
+section {
+  background: #1f242d;
+  .home {
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+    background: #1f242d;
+    width: 1400px;
+    height: auto;
+    .search {
+      display: flex;
+      position: relative;
+      align-items: center;
+      .blinking-cursor {
+        color: #fff;
+      }
+      input {
+        padding-left: 55px;
+        padding-right: 10px;
+        border-radius: 50px;
+        border: 1px solid #b1b1b1;
+        width: 1395px;
+        height: 45px;
+        font-family: Fira, sans-serif;
+        font-size: 22px;
+        background: none;
+      }
+      img {
+        left: 20px;
+        width: 28px;
+        height: auto;
+        display: flex;
+        position: absolute;
+      }
+    }
+    .description {
+      display: flex;
+      flex-direction: column;
+      margin-top: 80px;
+      width: 1395px;
+      gap: 20px;
+      color: #fff;
+      font-family: Roboto, sans-serif;
+      font-size: 21px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      h3 {
+        margin-top: 20px;
+        margin-bottom: 20px;
+      }
+      ul {
+        display: flex;
+        position: relative;
+        flex-direction: column;
+        gap: 20px;
+        list-style: disc;
+        padding-left: 20px;
+
+        li a {
+          color: #fff;
+          font-family: Roboto, sans-serif;
+          font-size: 18px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: normal;
+        }
+        li a:hover {
+          color: #0073fa;
+        }
+      }
+      p {
+        color: #fff;
+        font-family: Roboto, sans-serif;
+        font-size: 21px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+      }
+    }
+    .Popular {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      margin-top: 30px;
+      margin-bottom: 40px;
+      color: #fff;
+      font-family: Roboto, sans-serif;
+      font-size: 21px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      .Popular-cinema {
+        display: flex;
+        margin-top: 20px;
+        margin-bottom: 40px;
+        width: 1396px;
+        max-height: 394px;
+        gap: 40px;
+        a {
+          color: #fff;
+          .films-list-more {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #1f242d;
+            width: 155px;
+            height: 340px;
+            padding: 22px;
+            border-radius: 5%;
+            box-shadow: 0 0 27px #0000029a;
+            cursor: pointer;
+          }
+        }
+        .films-list-more:hover {
+          color: #0073fa;
+          transition: color 0.3s ease;
+        }
+        .films-list {
+          background: #1f242d;
+          width: 155px;
+          height: 340px;
+          padding: 22px;
+          border-radius: 5%;
+          box-shadow: 0 0 27px #0000029a;
+          cursor: pointer;
+          .films-list-image {
+            img {
+              width: 100%;
+            }
+          }
+          .films-list-descript {
+            margin-top: 10px;
+            overflow: hidden;
+            max-height: 100px;
+            font-size: 16px;
+            display: -webkit-box;
+            -webkit-line-clamp: 5;
+            -webkit-box-orient: vertical;
+          }
+        }
+      }
+    }
+  }
+}

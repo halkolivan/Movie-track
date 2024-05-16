@@ -1,0 +1,39 @@
+@import "fonts.scss";
+
+.footer {
+  display: flex;
+  justify-content: center;
+  border-top: 1px solid #fff;
+  background: #282f43;
+
+  ul {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    padding-top: 18px;
+    padding-bottom: 18px;
+    li:nth-of-type(1) {
+      list-style: none;
+    }
+    li {
+      color: #9ca8b1;
+      font-family: Roboto, sans-serif;
+      font-size: 21px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      span,
+      a {
+        color: #ffffff;
+        font-family: Roboto, sans-serif;
+        font-size: 21px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+      }
+      a:hover {
+        color: #0073fa;
+      }
+    }
+  }
+}

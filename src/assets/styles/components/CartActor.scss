@@ -1,0 +1,200 @@
+main {
+  display: flex;
+  flex: 1 1 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #1f242d;
+  .content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 80px;
+    max-width: 1400px;
+    width: 100%;
+    height: unset;
+    background: #1f242d;
+    .actor {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 1400px;
+      height: 454px;
+      img {
+        border-radius: 4%;
+        width: 300px;
+        height: 454px;
+        background: #3c485a;
+      }
+      .actor-description {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        width: 1080px;
+        background: #454a52;
+      }
+    }
+    .biography {
+      display: flex;
+      flex-direction: column;
+      width: 1400px;
+      gap: 10px;
+      max-width: unset;
+      height: 200px;
+      background: #41454e;
+    }
+    .filmography {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 100px;
+      width: 1400px;
+      height: 538px;
+      gap: 20px;
+      h2 {
+        color: #fff;
+        font-family: Fira, sans-serif;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+      }
+      .filmography-list {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 20px;
+
+        div {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 453px;
+          height: 269px;
+          border-radius: 5%;
+          box-shadow: 0 0 20px #00000269;
+        }
+        button {
+          border: none;
+          width: 453px;
+          height: 269px;
+          border-radius: 5%;
+          background: #1f242d;
+          box-shadow: 0 0 20px #0000029a;
+
+          color: #fff;
+          font-family: Fira, sans-serif;
+          font-size: 20px;
+          font-style: normal;
+          font-weight: 600;
+          line-height: normal;
+
+          cursor: pointer;
+        }
+        .filmography-list-more {
+          display: flex;
+          position: fixed;
+          flex-direction: column;
+          top: 80px;
+          width: 1400px;
+          height: 800px;
+          border-radius: 1%;
+          background: #1f242d;
+          box-shadow: 0 0 20px #0000027a;
+
+          .filmography-title {
+            display: flex;
+            position: relative;
+            flex-direction: row;
+            justify-content: space-between;
+            width: 100%;
+            height: 80px;
+            border-radius: 10px 10px 0px 0px !important;
+            background: #1f242d;
+            box-shadow: 0 0 20px #0000023a;
+            h2 {
+              display: flex;
+              padding-left: 20px;
+              color: #fff;
+              font-family: Roboto, sans-serif;
+              font-size: 40px;
+              font-style: normal;
+              font-weight: 600;
+              line-height: normal;
+              background: none;
+            }
+            button {
+              rotate: 45deg;
+              width: 50px;
+              height: 50px;
+              font-size: 50px;
+              border: none;
+              box-shadow: none;
+              background: none;
+            }
+          }
+          .filmography-list-more-films {
+            display: flex;
+            align-items: flex-start;
+            gap: 50px;
+            padding-top: 20px;
+            padding-left: 20px;
+            padding-right: 20px;
+            flex-direction: row;
+            width: unset;
+            height: 100%;
+            border-radius: 0%;
+            background: #1f242d;
+            box-shadow: 0 0 20px #1f242d41;
+            overflow: auto;
+            overflow-x: hidden;
+            .films-box-carts-column {
+              display: flex;
+              flex-direction: column;
+              gap: 20px;
+              width: 300px;
+              height: 2815px;
+              box-shadow: none;
+              div {
+                display: flex;
+                position: relative;
+                width: 300px;
+                height: 543px;
+                border-radius: 2%;
+                background: #1f242d;
+                box-shadow: 0 0 20px #0000023d;
+                .rank {
+                  display: flex;
+                  position: absolute;
+                  top: -15px;
+                  left: -15px;
+                  width: 50px;
+                  height: 50px;
+                  border-radius: 50%;
+                  background: #1f242d;
+                  box-shadow: 0 0 10px #00000275;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+::-webkit-scrollbar {
+  width: 8px; /* Ширина ползунка */
+}
+
+::-webkit-scrollbar-track {
+  background: #004da5; /* Цвет фона трека */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #0073fa; /* Цвет ползунка */
+  border-radius: 6px; /* Скругление углов ползунка */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #0050ac; /* Цвет ползунка при наведении */
+}
