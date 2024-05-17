@@ -27,8 +27,8 @@ export default function Home() {
   
 
   useEffect(() => {
-    dispatch(getFilmsPopular({ page: 1}));
-  }, [{ page: 1}, i18n.language]);
+    dispatch(getFilmsPopular());
+  }, [i18n.language]);
 
   // useEffect(() => {
   //   Request()
@@ -66,7 +66,7 @@ export default function Home() {
         </div>
         <div className="Popular">
           <h2>{t("popularFilms")}</h2>
-          {!loading ? (
+          {loading ? (
             <div className="Popular-cinema">
               {getPopularFilms ? (
                 getPopularFilms.map((item) => (

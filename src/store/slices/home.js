@@ -4,10 +4,10 @@ import axios from "axios";
 
 export const getFilmsPopular = createAsyncThunk(
   "homeRequest/getPopularFolms",
-  async ({ page, rejectedWithValue }) => {
+  async ({rejectedWithValue }) => {
     try {
       const response = await axios.get(
-        `movie/popular?language=ru-RU&page=${page}`
+        `movie/popular?language=ru-RU&page=1`
       );
       return response.data.results;
     } catch (error) {
