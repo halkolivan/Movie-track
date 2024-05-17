@@ -4,12 +4,11 @@ import axios from "axios";
 
 export const getFilmsPopular = createAsyncThunk(
   "homeRequest/getFilmsPopular",
-  async (_,{ rejectedWithValue }) => {
+  async (_, { rejectedWithValue }) => {
     try {
       const response = await axios.get(
         `https://api.themoviedb.org/3/movie/popular?language=ru-RU&page=1`
       );
-
       return response.data;
     } catch (error) {
       console.log(error);
