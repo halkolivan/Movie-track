@@ -9,11 +9,13 @@ export const getFilmsPopular = createAsyncThunk(
       const response = await axios.get(
         `movie/popular?language=ru-RU&page=1`
       );
-      return response.data.results;
+      
+      return response.data;
     } catch (error) {
       console.log(error);
       return rejectedWithValue(error.response.data);
     }
+    
   }
 );
 

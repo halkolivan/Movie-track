@@ -17,27 +17,17 @@ import search from "src/assets/images/search.png";
 
 export default function Home() {
   const { t, i18n } = useTranslation();
-  // const [popular, setPopular] = useState(undefined);
-  // const [page, setPage] = useState(1);
-  const dispatch = useDispatch();
-
-  const getPopularFilms = useSelector((state) => state.home.results);
-  const loading = useSelector((state) => state.home.loading);
-  console.log(getFilmsPopular)
-  
+  const [popular, setPopular] = useState(undefined);
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
-    dispatch(getFilmsPopular());
-  }, [i18n.language]);
-
-  // useEffect(() => {
-  //   Request()
-  //     .get(`movie/popular?language=ru-RU&page=${page}`)
-  //     .then((response) => {
-  //       const data = response.data.results.slice(0, 5);
-  //       setPopular(data);
-  //     });
-  // }, [page, i18n.language]);
+    Request()
+      .get(`movie/popular?language=ru-RU&page=${page}`)
+      .then((response) => {
+        const data = response.data.results.slice(0, 5);
+        setPopular(data);
+      });
+  }, [page, i18n.language]);
 
   return (
     <section>
@@ -66,36 +56,31 @@ export default function Home() {
         </div>
         <div className="Popular">
           <h2>{t("popularFilms")}</h2>
-          {loading ? (
-            <div className="Popular-cinema">
-              {getPopularFilms ? (
-                getPopularFilms.map((item) => (
-                  <NavLink to={`/detailsFilm/${item.id}`} key={item.id}>
-                    <div className="films-list">
-                      <div className="films-list-image">
-                        <img
-                          src={
-                            "https://image.tmdb.org/t/p/original/" +
-                            item.poster_path
-                          }
-                          alt=""
-                        />
-                      </div>
-                      <div className="films-list-descript">{item.overview}</div>
+          <div className="Popular-cinema">
+            {popular ? (
+              popular.map((item) => (
+                <NavLink to={`/detailsFilm/${item.id}`} key={item.id}>
+                  <div className="films-list">
+                    <div className="films-list-image">
+                      <img
+                        src={
+                          "https://image.tmdb.org/t/p/original/" +
+                          item.poster_path
+                        }
+                        alt=""
+                      />
                     </div>
-                  </NavLink>
-                ))
-              ) : (
-                <p>Загрузка ...</p>
-              )}
-              <NavLink to="/popularFilmsPages">
-                <div className="films-list-more">{t("more")}</div>
-              </NavLink>
-            </div>
-          ) : (
-            <p>Фильмы не загружены ...</p>
-          )}
-
+                    <div className="films-list-descript">{item.overview}</div>
+                  </div>
+                </NavLink>
+              ))
+            ) : (
+              <p>Загрузка ...</p>
+            )}
+            <NavLink to="/popularFilmsPages">
+              <div className="films-list-more">{t("more")}</div>
+            </NavLink>
+          </div>
           <h2>{t("popularSerial")}</h2>
           <div className="Popular-cinema">
             <NavLink to="/detailsFilm">
