@@ -3,19 +3,18 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const getFilmsPopular = createAsyncThunk(
-  "homeRequest/getPopularFolms",
-  async ({rejectedWithValue }) => {
+  "homeRequest/getFilmsPopular",
+  async (_,{ rejectedWithValue }) => {
     try {
       const response = await axios.get(
-        `movie/popular?language=ru-RU&page=1`
+        `https://api.themoviedb.org/3/movie/popular?language=ru-RU&page=1`
       );
-      
+
       return response.data;
     } catch (error) {
       console.log(error);
       return rejectedWithValue(error.response.data);
     }
-    
   }
 );
 
@@ -33,7 +32,7 @@ const homeSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(getFilmsPopular.fulfilled, (state, { payload }) => {
-      state.results = payload;
+      state.results = payload.results;
       state.loading = false;
     });
     builder.addCase(getFilmsPopular.rejected, (state, { payload }) => {

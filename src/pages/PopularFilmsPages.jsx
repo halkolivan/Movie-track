@@ -6,14 +6,13 @@ import { useSelector, useDispatch } from "react-redux";
 import "src/assets/styles/pages/PopularFilmsPages.scss";
 
 export default function PopularFilmsPages() {
-  
   const requestPopularFilms = useSelector((state) => state.home.results);
   const dispatch = useDispatch();
-  useEffect(()=>{
-    dispatch(getFilmsPopular())
-  },[])
-  
-  console.log(requestPopularFilms);
+  useEffect(() => {
+    dispatch(getFilmsPopular());
+  }, []);
+  console.log(requestPopularFilms)
+
   return (
     <div className="main-content">
       <div className="films-page">
