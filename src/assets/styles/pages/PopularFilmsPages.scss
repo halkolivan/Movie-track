@@ -8,21 +8,31 @@
   background: #1f242d;
   .films-page {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     flex-direction: row;
     flex-wrap: wrap;
-    height: 755px;
+    height: unset;
     width: 1400px;
-    margin-top: 20px;
     margin-bottom: 20px;
-    background: #4e5666;
+    // background: #4e5666;
+    overflow-y: auto;
+    overflow-x: hidden;
+    .films-page-content {
+      display: flex;
+      justify-content: center;
+      flex-direction: row;
+      flex-wrap: wrap;
+      margin-top: 10px;
+      margin-bottom: 20px;
+      gap: 35px;
+    }
     .films-list {
       background: #1f242d;
       width: 155px;
       height: 340px;
       padding: 22px;
-      border-radius: 5%;
+      border-radius: 3%;
       box-shadow: 0 0 27px #0000029a;
       cursor: pointer;
       .films-list-image {
