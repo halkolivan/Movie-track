@@ -11,9 +11,11 @@
   "searchFilms": "Find a movie, a TV series, a person...",
   "popularFilms": "Popular movies",
   "popularSerial": "Popular TV Series",
-  "similarFilms":"Similar films",
+  "similarFilms": "Similar films",
   "more": "More",
   "filmography": "filmography",
-  "addList":"Add to list"
-  
+  "addList": "Add to list",
+  "dataRelease": "Release data",
+  "voteCount": "Vote count",
+  "moreDetailed": "More detailed"
 }

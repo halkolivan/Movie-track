@@ -2,31 +2,32 @@ import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import Request from "../helpers/request";
 
-import { getFilmsPopular } from "../store/slices/home";
+import { getFilmsPopular, getPopularSerial } from "../store/slices/home";
 
 // import styles
 import "src/assets/styles/pages/Home.scss";
-
-// import components
-import CartPopularSerial from "src/components/CartPopularSerial.jsx";
 
 //images
 import search from "src/assets/images/search.png";
 
 export default function Home() {
   const { t, i18n } = useTranslation();
-  const [popular, setPopular] = useState(undefined);
   const [page, setPage] = useState(1);
+  const dispatch = useDispatch();
+  // Вынемаем популярные фильмы
+  const getPopularFilms = useSelector((state) => state.home.results || []);
+  const firstFilms = getPopularFilms.slice(0, 5);
+
+  //Вынемаем популярные сериалы
+  const getSerialPopular = useSelector(
+    (state) => state.home.resultsSerial || []
+  );
+  const firstSerials = getSerialPopular.slice(0, 5);
 
   useEffect(() => {
-    Request()
-      .get(`movie/popular?language=ru-RU&page=${page}`)
-      .then((response) => {
-        const data = response.data.results.slice(0, 5);
-        setPopular(data);
-      });
+    dispatch(getFilmsPopular({ page: page, language: i18n.language }));
+    dispatch(getPopularSerial({ page: page, language: i18n.language }));
   }, [page, i18n.language]);
 
   return (
@@ -57,11 +58,12 @@ export default function Home() {
         <div className="Popular">
           <h2>{t("popularFilms")}</h2>
           <div className="Popular-cinema">
-            {popular ? (
-              popular.map((item) => (
-                <NavLink to={`/detailsFilm/${item.id}`} key={item.id}>
-                  <div className="films-list">
-                    <div className="films-list-image">
+            {firstFilms ? (
+              firstFilms.map((item) => (
+                <div className="films-list">
+                  <div className="films-list-image">
+                    <div className="rate">{item.vote_average.toFixed(1)}</div>
+                    <NavLink to={`/detailsFilm/${item.id}`} key={item.id}>
                       <img
                         src={
                           "https://image.tmdb.org/t/p/original/" +
@@ -69,10 +71,21 @@ export default function Home() {
                         }
                         alt=""
                       />
-                    </div>
-                    <div className="films-list-descript">{item.overview}</div>
+                    </NavLink>
                   </div>
-                </NavLink>
+                  <div className="films-list-descript">
+                    <span className="release-date">
+                      {t("dataRelease")}: {item.release_date}
+                    </span>
+                    <div className="title">{item.title}</div>
+                    <NavLink to={`/detailsFilm/${item.id}`} key={item.id}>
+                      {t("moreDetailed")}
+                    </NavLink>
+                    <p>
+                      {t("voteCount")} : {item.vote_count}
+                    </p>
+                  </div>
+                </div>
               ))
             ) : (
               <p>Загрузка ...</p>
@@ -83,47 +96,41 @@ export default function Home() {
           </div>
           <h2>{t("popularSerial")}</h2>
           <div className="Popular-cinema">
-            <NavLink to="/detailsFilm">
-              <div className="films-list">
-                <div className="films-list-image">
-                  <img src="" alt="" />
+            {firstSerials ? (
+              firstSerials.map((item) => (
+                <div className="films-list">
+                  <div className="films-list-image">
+                    <div className="rate">{item.vote_average.toFixed(1)}</div>
+                    <NavLink to={`/detailsFilm/${item.id}`} key={item.id}>
+                      <img
+                        src={
+                          "https://image.tmdb.org/t/p/original/" +
+                          item.poster_path
+                        }
+                        alt=""
+                      />
+                    </NavLink>
+                  </div>
+                  <div className="films-list-descript">
+                    <span className="release-date">
+                      {t("dataRelease")}: {item.first_air_date}
+                    </span>
+                    <div className="title">{item.name}</div>
+                    <NavLink to={`/detailsFilm/${item.id}`} key={item.id}>
+                      {t("moreDetailed")}
+                    </NavLink>
+                    <p>
+                      {t("voteCount")} : {item.vote_count}
+                    </p>
+                  </div>
                 </div>
-                <div className="films-list-descript"></div>
-              </div>
+              ))
+            ) : (
+              <p>Загрузка ...</p>
+            )}
+            <NavLink to="/popularSerialPages">
+              <div className="films-list-more">{t("more")}</div>
             </NavLink>
-            <NavLink to="/detailsFilm">
-              <div className="films-list">
-                <div className="films-list-image">
-                  <img src="" alt="" />
-                </div>
-                <div className="films-list-descript"></div>
-              </div>
-            </NavLink>
-            <NavLink to="/detailsFilm">
-              <div className="films-list">
-                <div className="films-list-image">
-                  <img src="" alt="" />
-                </div>
-                <div className="films-list-descript"></div>
-              </div>
-            </NavLink>
-            <NavLink to="/detailsFilm">
-              <div className="films-list">
-                <div className="films-list-image">
-                  <img src="" alt="" />
-                </div>
-                <div className="films-list-descript"></div>
-              </div>
-            </NavLink>
-            <NavLink to="/detailsFilm">
-              <div className="films-list">
-                <div className="films-list-image">
-                  <img src="" alt="" />
-                </div>
-                <div className="films-list-descript"></div>
-              </div>
-            </NavLink>
-            <CartPopularSerial />
           </div>
         </div>
       </div>

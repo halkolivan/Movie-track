@@ -10,6 +10,7 @@ import WarningLists from './components/WarningLists'
 import DetailsFilm from './components/DetailsFilm'
 import CartActor from './components/CartActor'
 import PopularFilmsPages from './pages/PopularFilmsPages'
+import PopularSerialPages from './pages/PopularSerialPages'
 
 export default function Router() {
   const routing = createBrowserRouter([
@@ -38,6 +39,10 @@ export default function Router() {
         {
           path: '/popularFilmsPages',
           element: <PopularFilmsPages/>
+        },
+        {
+          path: '/popularSerialPages',
+          element: <PopularSerialPages/>
         },
         {
           path: '*',

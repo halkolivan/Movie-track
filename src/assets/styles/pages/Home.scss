@@ -99,7 +99,7 @@ section {
         margin-top: 20px;
         margin-bottom: 40px;
         width: 1396px;
-        max-height: 394px;
+        max-height: 410px;
         gap: 40px;
         a {
           color: #fff;
@@ -123,24 +123,65 @@ section {
         .films-list {
           background: #1f242d;
           width: 155px;
-          height: 340px;
+          min-height: 340px;
+          height: unset;
           padding: 22px;
           border-radius: 5%;
           box-shadow: 0 0 27px #0000029a;
-          cursor: pointer;
+          .rate {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            margin-top: -35px;
+            margin-left: -35px;
+            background: #1f242d;
+            border-radius: 50%;
+            color: #2ec235;
+            box-shadow: 0 0 10px #0000029a;
+          }
           .films-list-image {
             img {
+              border-radius: 5%;
               width: 100%;
             }
           }
           .films-list-descript {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
             margin-top: 10px;
             overflow: hidden;
-            max-height: 100px;
+            min-height: 100px;
+            height: unset;
             font-size: 16px;
-            display: -webkit-box;
             -webkit-line-clamp: 5;
             -webkit-box-orient: vertical;
+            p {
+              color: #ecea73;
+              font-family: Roboto, sans-serif;
+              font-size: 11px;
+              font-style: normal;
+              font-weight: 400;
+              line-height: normal;
+            }
+            .release-date {
+              color: #9ca8b1;
+              font-size: 13px;
+              font-style: normal;
+              font-weight: 400;
+              line-height: normal;
+            }
+            a {
+              text-decoration: underline;
+              font-size: 14px;
+            }
+            a:hover {
+              color: #0073fa;
+              transition: color 0.3s ease;
+            }
           }
         }
       }

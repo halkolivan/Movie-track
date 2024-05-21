@@ -11,9 +11,12 @@
   "searchFilms": "Найти фильм, сериал, персону...",
   "popularFilms": "Популярные фильмы",
   "popularSerial": "Популярные Сериалы",
-  "similarFilms":"Похожие фильмы",
-  "more":"Больше",
+  "similarFilms": "Похожие фильмы",
+  "more": "Больше",
   "filmography": "Фильмография",
-  "addList":"Добавить в список"
-
+  "addList": "Добавить в список",
+  "dataRelease": "Дата выхода",
+  "voteCount": "Подсчет голосов",
+  "moreDetailed": "Подробнее"
+  
 }
