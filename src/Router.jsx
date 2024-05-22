@@ -28,7 +28,7 @@ export default function Router() {
         },
 
         {
-          path: '/detailsFilm',
+          path: '/detailsFilm/:id',
           element: <DetailsFilm />,
         },
 

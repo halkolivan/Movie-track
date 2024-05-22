@@ -89,7 +89,7 @@ export default function PopularFilmsPages() {
           breakLabel="..."
           onPageChange={handleClick}
           pageRangeDisplayed={5}
-          pageCount={44261}
+          pageCount={44270}
           nextLabel="next >"
           previousLabel="< previous"
           renderOnZeroPageCount={null}

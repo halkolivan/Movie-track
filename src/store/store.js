@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 
 import Home from "../store/slices/home"
+import DetailCinema from "../store/slices/detailsCinema"
 
 export const store = configureStore({
     reducer: {
-      home:Home
+      home:Home,
+      detailFilm: DetailCinema
     }
 })

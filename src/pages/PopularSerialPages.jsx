@@ -89,7 +89,7 @@ export default function PopularSerialPages() {
           breakLabel="..."
           onPageChange={handleClick}
           pageRangeDisplayed={5}
-          pageCount={8623}
+          pageCount={8624}
           nextLabel="next >"
           previousLabel="< previous"
           renderOnZeroPageCount={null}
