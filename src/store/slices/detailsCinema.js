@@ -6,9 +6,8 @@ export const getDetailFilm = createAsyncThunk(
   async (data, { id }, { rejectedWithValue }) => {
     try {
       const response = await Request().get(
-        `movie/${id}?language=${data.language}`
+        `movie/movie_${id}?language=${data.language}`
       );
-      console.log(response)
       return response.data;
     } catch (error) {
       console.log(error);
@@ -17,41 +16,13 @@ export const getDetailFilm = createAsyncThunk(
   }
 );
 
-const initialState = {
-  resultsDfilm: {
-    adult: false,
-    backdrop_path: "",
-    belongs_to_collection: null,
-    budget: 0,
-    genres: [],
-    homepage: "",
-    id: 0,
-    imdb_id: "",
-    original_language: "",
-    original_title: "",
-    overview: "",
-    popularity: 0,
-    poster_path: "",
-    production_companies: [],
-    production_countries: [],
-    release_date: "",
-    revenue: 0,
-    runtime: 0,
-    spoken_languages: [],
-    status: "",
-    tagline: "",
-    title: "",
-    video: false,
-    vote_average: 0,
-    vote_count: 0,
-  },
-  detailFilmError: undefined,
-  loading: true,
-};
-
 const detailFilmsSlice = createSlice({
   name: "detailFilm",
-  initialState,
+  initialState: {
+    resultsDfilm: undefined,
+    detailFilmError: undefined,
+    loading: true,
+  },
   reducers: {
     setLoading(state, action) {
       state.loading = action.payload;
@@ -60,7 +31,7 @@ const detailFilmsSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getDetailFilm.fulfilled, (state, { payload }) => {
-        state.resultsDfilm = payload.initialState;
+        state.resultsDfilm = payload;
         state.loading = false;
       })
       .addCase(getDetailFilm.rejected, (state, { payload }) => {
@@ -68,6 +39,6 @@ const detailFilmsSlice = createSlice({
       });
   },
 });
-
+console.log(getDetailFilm)
 export const { setloading } = detailFilmsSlice.actions;
 export default detailFilmsSlice.reducer;

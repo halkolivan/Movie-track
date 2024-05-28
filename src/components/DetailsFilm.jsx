@@ -4,11 +4,12 @@ import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 import { getDetailFilm } from "../store/slices/detailsCinema";
+import { getFilmsPopular } from "../store/slices/home";
 
 // import styles
 import "src/assets/styles/pages/DetailsFilm.scss";
 
-export default function DetailsFilm({ id }) {
+export default function DetailsFilm({id}) {
   const { t, i18n } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
@@ -37,8 +38,8 @@ export default function DetailsFilm({ id }) {
   };
 
   useEffect(() => {
-    dispatch(getDetailFilm({ id: id,language: i18n.language }));
-  }, [dispatch, id, i18n.language]);
+    dispatch(getDetailFilm({id: id, language: i18n.language }));
+  }, [ id, i18n.language]);
 
   const requestDetal = useSelector((state) => state.detailFilm.initialState);
   const loading = useSelector((state) => state.detailFilm.loading);
