@@ -1,23 +1,23 @@
-import Request from "../../helpers/request";
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import Request from '../../helpers/request'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 export const getDetailFilm = createAsyncThunk(
-  "detailFilmRequest/getDetailFilm",
-  async (data, { id }, { rejectedWithValue }) => {
+  'detailFilmRequest/getDetailFilm',
+  async (data, { rejectedWithValue }) => {
     try {
       const response = await Request().get(
-        `movie/movie_${id}?language=${data.language}`
-      );
-      return response.data;
+        `movie/${data.id}?language=${data.language}`
+      )
+      return response.data
     } catch (error) {
-      console.log(error);
-      return rejectedWithValue(error.response.data);
+      console.log(error)
+      return rejectedWithValue(error.response.data)
     }
   }
-);
+)
 
 const detailFilmsSlice = createSlice({
-  name: "detailFilm",
+  name: 'detailFilm',
   initialState: {
     resultsDfilm: undefined,
     detailFilmError: undefined,
@@ -25,20 +25,20 @@ const detailFilmsSlice = createSlice({
   },
   reducers: {
     setLoading(state, action) {
-      state.loading = action.payload;
+      state.loading = action.payload
     },
   },
-  extraReducers: (builder) => {
+  extraReducers: builder => {
     builder
       .addCase(getDetailFilm.fulfilled, (state, { payload }) => {
-        state.resultsDfilm = payload;
-        state.loading = false;
+        state.resultsDfilm = payload
+        state.loading = false
       })
       .addCase(getDetailFilm.rejected, (state, { payload }) => {
-        state.detailFilmError = payload;
-      });
+        state.detailFilmError = payload
+      })
   },
-});
+})
 console.log(getDetailFilm)
-export const { setloading } = detailFilmsSlice.actions;
-export default detailFilmsSlice.reducer;
+export const { setloading } = detailFilmsSlice.actions
+export default detailFilmsSlice.reducer
