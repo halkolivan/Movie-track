@@ -40,5 +40,5 @@ const detailFilmsSlice = createSlice({
   },
 })
 console.log(getDetailFilm)
-export const { setloading } = detailFilmsSlice.actions
+export const { setLoading } = detailFilmsSlice.actions
 export default detailFilmsSlice.reducer
