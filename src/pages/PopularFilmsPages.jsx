@@ -65,7 +65,7 @@ export default function PopularFilmsPages() {
                     </span>
                     <div className="title">{item.title}</div>
                     <NavLink to={`/detailsFilm/${item.id}`} key={item.id}>
-                    {t("moreDetailed")}
+                      {t("moreDetailed")}
                     </NavLink>
                     <p>
                       {t("voteCount")} : {item.vote_count}
@@ -89,7 +89,7 @@ export default function PopularFilmsPages() {
           breakLabel="..."
           onPageChange={handleClick}
           pageRangeDisplayed={5}
-          pageCount={44270}
+          pageCount={500}
           nextLabel="next >"
           previousLabel="< previous"
           renderOnZeroPageCount={null}

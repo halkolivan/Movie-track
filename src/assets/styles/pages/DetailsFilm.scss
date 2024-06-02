@@ -5,16 +5,38 @@ main {
   justify-content: center;
   align-items: center;
   background: #1f242d;
-  .content {
+  .content-general {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    margin-top: 80px;
+    margin-top: 15px;
     max-width: 1400px;
     width: 100%;
     background: #1f242d;
     .content-detail-description {
-      h1,
+      h1 {
+        color: #fff;
+        font-family: Cantarell, sans-serif;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        margin-bottom: 10px;
+      }
+      h2 {
+        color: #89939e;
+        font-family: Cantarell, sans-serif;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        margin-bottom: 10px;
+      }
+    }
+    .content-description {
+      display: flex;
+      flex-direction: column;
+      height: unset;
       h2 {
         color: #fff;
         font-family: Cantarell, sans-serif;
@@ -22,22 +44,20 @@ main {
         font-style: normal;
         font-weight: 600;
         line-height: normal;
+        margin-top: 20px;
       }
-    }
-    .content-description h2 {
-      color: #fff;
-      font-family: Cantarell, sans-serif;
-      font-size: 24px;
-      font-style: normal;
-      font-weight: 600;
-      line-height: normal;
-      margin-top: 20px;
-    }
-    .content-description p {
-      margin-top: 20px;
-      width: 1400px;
-      height: 150px;
-      background: #292f3b;
+      p {
+        margin-top: 20px;
+        width: 1400px;
+        height: 150px;
+        margin-bottom: 25px;
+        color: #89939e;
+        font-family: Ubuntu, sans-serif;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+      }
     }
     .content-video-material h2 {
       color: #fff;
@@ -98,15 +118,25 @@ main {
         flex-direction: column;
         width: 1050px;
         height: auto;
-        background: #262c38;
         ul {
-          margin-top: 50px;
+          margin-top: 5px;
           display: flex;
           flex-direction: column;
-          gap: 50px;
+          gap: 10px;
+          padding-left: 0px;
+
+          color: #89939e;
+          font-family: Cantarell, sans-serif;
+          font-size: 20px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: normal;
           li {
             list-style-type: none;
             border-bottom: 1px solid #1f242d;
+            span:nth-of-type(2) {
+              color: #fff;
+            }
           }
         }
       }
@@ -230,8 +260,10 @@ main {
         justify-content: center;
         width: 300px;
         height: 453px;
-        border-radius: 3%;
-        background: #455064;
+        img {
+          width: 100%;
+          border-radius: 3%;
+        }
       }
       .add-list {
         width: 300px;
