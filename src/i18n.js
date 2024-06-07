@@ -12,7 +12,7 @@ i18n
     fallbackLng: "ru",
     debug: true,
     backend: {
-      loadPath: "public/locales/{{lng}}/translate.json",
+      loadPath: "/locales/{{lng}}/translate.json",
     },
     detection: {
       order: ["queryString", "cookie"],
