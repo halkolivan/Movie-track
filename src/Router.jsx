@@ -38,11 +38,11 @@ export default function Router() {
         },
         {
           path: '/popularFilmsPages',
-          element: <PopularFilmsPages/>
+          element: <PopularFilmsPages />,
         },
         {
           path: '/popularSerialPages',
-          element: <PopularSerialPages/>
+          element: <PopularSerialPages />,
         },
         {
           path: '*',
