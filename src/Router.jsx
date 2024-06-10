@@ -8,7 +8,7 @@ import Home from './pages/Home'
 import Error from './pages/Error'
 import WarningLists from './components/WarningLists'
 import DetailsFilm from './components/DetailsFilm'
-import CartActor from './components/CartActor'
+import DetailPerson from './components/DetailPerson'
 import PopularFilmsPages from './pages/PopularFilmsPages'
 import PopularSerialPages from './pages/PopularSerialPages'
 
@@ -33,8 +33,8 @@ export default function Router() {
         },
 
         {
-          path: '/cartActor',
-          element: <CartActor />,
+          path: '/detailPerson/:id',
+          element: <DetailPerson />,
         },
         {
           path: '/popularFilmsPages',

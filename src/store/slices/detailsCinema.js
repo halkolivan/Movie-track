@@ -1,5 +1,5 @@
-import Request from '../../helpers/request'
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import Request from "../../helpers/request";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const getDetailFilm = createAsyncThunk(
   "detailFilmRequest/getDetailFilm",
@@ -46,7 +46,6 @@ export const getCreditsPerson = createAsyncThunk(
     }
   }
 );
-
 //Похожие кинокартины
 export const getRecommendatFilm = createAsyncThunk(
   "recommendatFilmRequest/getRecommendatFilm",
@@ -71,14 +70,14 @@ export const getCombinedPerson = createAsyncThunk(
       );
       return response.data;
     } catch (error) {
-      console.log(error)
-      return rejectedWithValue(error.response.data)
+      console.log(error);
+      return rejectedWithValue(error.response.data);
     }
   }
-)
+);
 
 const detailFilmsSlice = createSlice({
-  name: 'detailFilm',
+  name: "detailFilm",
   initialState: {
     resultsDfilm: undefined,
     results: undefined,
@@ -92,14 +91,14 @@ const detailFilmsSlice = createSlice({
   },
   reducers: {
     setLoading(state, action) {
-      state.loading = action.payload
+      state.loading = action.payload;
     },
   },
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     builder
       .addCase(getDetailFilm.fulfilled, (state, { payload }) => {
-        state.resultsDfilm = payload
-        state.loading = false
+        state.resultsDfilm = payload;
+        state.loading = false;
       })
       .addCase(getDetailFilm.rejected, (state, { payload }) => {
         state.detailFilmError = payload;

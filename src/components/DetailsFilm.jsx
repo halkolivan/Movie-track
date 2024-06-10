@@ -1,8 +1,8 @@
+import YouTube from "react-youtube";
 import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import YouTube from "react-youtube";
 
 // import styles
 import "src/assets/styles/pages/DetailsFilm.scss";
@@ -247,7 +247,7 @@ export default function DetailsFilm() {
             <div className="content-actors-carts">
               {firstActors && firstActors.length > 0 ? (
                 firstActors.map((item) => (
-                  <NavLink to={`/cartActor/${item.id}`} key={item.id}>
+                  <NavLink to={`/detailPerson/${item.id}`} key={item.id}>
                     <img
                       src={
                         "https://image.tmdb.org/t/p/original/" +

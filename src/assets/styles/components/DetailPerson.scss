@@ -21,7 +21,7 @@ main {
       width: 1400px;
       height: 454px;
       img {
-        border-radius: 4%;
+        border-radius: 2%;
         width: 300px;
         height: 454px;
         background: #3c485a;
@@ -31,7 +31,16 @@ main {
         flex-direction: column;
         gap: 20px;
         width: 1080px;
-        background: #454a52;
+        margin-top: 10px;
+        margin-left: 60px;
+        span {
+          color: #fff;
+          font-family: Roboto, sans-serif;
+          font-size: 20px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: normal;
+        }
       }
     }
     .biography {
@@ -40,20 +49,44 @@ main {
       width: 1400px;
       gap: 10px;
       max-width: unset;
-      height: 200px;
-      background: #41454e;
+      min-height: 200px;
+      height: unset;
+      margin-top: 20px;
+
+      h2 {
+        color: #fff;
+        font-family: Fira, sans-serif;
+        font-size: 30px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+      }
+      p {
+        padding: 5px;
+        border: 2px solid #fff;
+        border-radius: 5px;
+        max-width: unset;
+        min-height: 200px;
+        color: #fff;
+        font-family: Fira, sans-serif;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+      }
     }
     .filmography {
       display: flex;
       flex-direction: column;
       margin-bottom: 100px;
+      margin-top: 20px;
       width: 1400px;
       height: 538px;
       gap: 20px;
       h2 {
         color: #fff;
         font-family: Fira, sans-serif;
-        font-size: 20px;
+        font-size: 30px;
         font-style: normal;
         font-weight: 600;
         line-height: normal;
@@ -63,6 +96,47 @@ main {
         flex-direction: row;
         flex-wrap: wrap;
         gap: 20px;
+
+        .cart-cinema {
+          display: flex;
+          flex-direction: row;
+          flex-wrap: nowrap;
+          width: 453px;
+          height: auto;
+          border-radius: 3%;
+          gap: 20px;
+          box-shadow: 0 0 20px rgba(0, 0, 2, 0.4117647059);
+          cursor: default;
+          img {
+            width: 185px;
+            height: auto;
+            border-radius: 5px;
+          }
+          .descript-similar-content {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+            margin-top: 10px;
+            gap: 15px;
+            box-shadow: none;
+            span {
+              color: #fff;
+              font-family: Fira, sans-serif;
+              font-size: 15px;
+              font-style: normal;
+              font-weight: 400;
+              line-height: normal;
+            }
+            a {
+              box-shadow: none;
+              span {
+                cursor: pointer;
+                text-decoration: underline;
+              }
+            }
+          }
+        }
 
         div {
           display: flex;
@@ -76,8 +150,8 @@ main {
         button {
           border: none;
           width: 453px;
-          height: 269px;
-          border-radius: 5%;
+          height: 280px;
+          border-radius: 3%;
           background: #1f242d;
           box-shadow: 0 0 20px #0000029a;
 
