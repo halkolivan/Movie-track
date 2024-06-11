@@ -140,6 +140,7 @@ export default function DetailsFilm() {
                 <div className="content-detail-description">
                   <h1>Название: {requestDetal.title}</h1>
                   <h2>Оригинальное название: {requestDetal.original_title}</h2>
+
                   <ul>
                     <li>
                       <span>Оценка пользователей: </span>
@@ -162,7 +163,7 @@ export default function DetailsFilm() {
 
                     <li>
                       <span>Режиссёр: </span>
-                      <span>_________</span>
+                      <span>__________</span>
                     </li>
 
                     <li>

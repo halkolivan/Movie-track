@@ -47,8 +47,6 @@ export default function DetailPerson() {
     : [];
   console.log("\x1b[34m\x1b[3m%s\x1b[0m", "Combined", firstCombidenContent);
 
-  // console.log("\x1b[34m\x1b[3m%s\x1b[0m", "Combined", requestCombined);
-
   const loading = useSelector((state) => state.detailsPerson.loading);
 
   return (
@@ -108,8 +106,8 @@ export default function DetailPerson() {
                           alt={item.name}
                         />
                         <div className="descript-similar-content">
-                          <span>Дата выхода: </span>
-                          <span>Название: </span>
+                          <span>Дата выхода: {item.release_date}</span>
+                          <span>Название: {item.title}</span>
                           <NavLink
                             to={`/detailsFilm/${item.id}`}
                             key={`${item.id}-${index}`}
@@ -130,24 +128,41 @@ export default function DetailPerson() {
                         <h2>Фильмография</h2>
                         <button onClick={closePopWindow}>+</button>
                       </div>
-                      <div className="filmography-list-more-films">
-                        <div className="films-box-carts-column">
-                          <div>
-                            <div className="rank"></div>
-                          </div>
-                          <div>
-                            <div className="rank"></div>
-                          </div>
-                          <div>
-                            <div className="rank"></div>
-                          </div>
-                          <div>
-                            <div className="rank"></div>
-                          </div>
-                          <div>
-                            <div className="rank"></div>
-                          </div>
-                        </div>
+
+                      <div className="filmography-list-more-movie">
+                        {requestCombined.cast &&
+                        requestCombined.cast.length > 0 ? (
+                          requestCombined.cast.map((item, index) => (
+                            <div
+                              className="cart-movie"
+                              key={`${item.id}-${index}`}
+                            >
+                              <img
+                                src={
+                                  "https://image.tmdb.org/t/p/original/" +
+                                  item.poster_path
+                                }
+                                alt="none image"
+                              />
+                              <div className="rank">
+                                {item.vote_average.toFixed(1)}
+                              </div>
+
+                              <div className="description">
+                                <span>Название: {item.title}</span>
+                                <span>Дата выхода: {item.release_date}</span>
+                                <span key={`${item.id}-${index}`}>
+                                  Роль: {item.character}
+                                </span>
+                                <NavLink to={`/detailsFilm/${item.id}`} key={item.id}>
+                                  <span>Подробнее: </span>
+                                </NavLink>
+                              </div>
+                            </div>
+                          ))
+                        ) : (
+                          <p> Загрузка ... </p>
+                        )}
                       </div>
                     </section>
                   )}
