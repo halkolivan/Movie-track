@@ -17,17 +17,34 @@ export default function Search({ films, serials }) {
     setQuery(event.target.value);
   };
 
+  //   // Фильтрация фильмов
   const filteredMovies = Array.isArray(films)
-    ? films.filter((movie) =>
-        movie.title.toLowerCase().includes(query.toLowerCase())
-      )
-    : [];
+  ? films.filter((movie) =>
+      movie.title && movie.title.toLowerCase().includes(query.toLowerCase())
+    )
+  : [];
 
+  // Фильтрация сериалов
   const filteredSerials = Array.isArray(serials)
-    ? serials.filter((serial) =>
-        serial.name.toLowerCase().includes(query.toLowerCase())
-      )
-    : [];
+  ? serials.filter((serial) =>
+      serial.name && serial.name.toLowerCase().includes(query.toLowerCase())
+    )
+  : [];
+
+  // Объединение данных из всех страниц
+  // const allMovies = films.flat(); // Предположим, что films это массив массивов, нужно преобразовать его в один плоский массив
+  // const allSerials = serials.flat(); // Аналогично для serials
+
+  // Фильтрация фильмов и сериалов
+  // const filteredMovies = allMovies.filter(
+  //   (movie) =>
+  //     movie.title && movie.title.toLowerCase().includes(query.toLowerCase())
+  // );
+
+  // const filteredSerials = allSerials.filter(
+  //   (serial) =>
+  //     serial.name && serial.name.toLowerCase().includes(query.toLowerCase())
+  // );
 
   return (
     <div>
@@ -55,7 +72,7 @@ export default function Search({ films, serials }) {
           <div className="results">
             {filteredMovies.length > 0 ? (
               filteredMovies.map((movie) => (
-                <div className="films-list">
+                <div className="films-list" key={movie.id}>
                   <div className="films-list-image">
                     <div className="rate">{movie.vote_average.toFixed(1)}</div>
                     <NavLink to={`/detailsFilm/${movie.id}`} key={movie.id}>
@@ -87,7 +104,7 @@ export default function Search({ films, serials }) {
             )}
             {filteredSerials.length > 0 ? (
               filteredSerials.map((serials) => (
-                <div className="films-list">
+                <div className="films-list" key={serials.id}>
                   <div className="films-list-image">
                     <div className="rate">
                       {serials.vote_average.toFixed(1)}

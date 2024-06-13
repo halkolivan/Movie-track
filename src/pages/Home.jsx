@@ -53,21 +53,21 @@ export default function Home() {
 
         {/* Поиск */}
 
-        <Search films={getFilmsPopular} serials={getPopularSerial} />
+        <Search films={getPopularFilms} serials={getSerialPopular} />
 
         <div className="Popular">
           <h2>{t("popularFilms")}</h2>
           <div className="Popular-cinema">
             {getPopularFilms ? (
-              getPopularFilms.slice(0, 5).map((item) => (
-                <div className="films-list">
+              getPopularFilms.slice(0, 5).map((movie) => (
+                <div className="films-list" key={movie.id}>
                   <div className="films-list-image">
-                    <div className="rate">{item.vote_average.toFixed(1)}</div>
-                    <NavLink to={`/detailsFilm/${item.id}`} key={item.id}>
+                    <div className="rate">{movie.vote_average.toFixed(1)}</div>
+                    <NavLink to={`/detailsFilm/${movie.id}`} key={movie.id}>
                       <img
                         src={
                           "https://image.tmdb.org/t/p/original/" +
-                          item.poster_path
+                          movie.poster_path
                         }
                         alt=""
                       />
@@ -75,14 +75,14 @@ export default function Home() {
                   </div>
                   <div className="films-list-descript">
                     <span className="release-date">
-                      {t("dataRelease")}: {item.release_date}
+                      {t("dataRelease")}: {movie.release_date}
                     </span>
-                    <div className="title">{item.title}</div>
-                    <NavLink to={`/detailsFilm/${item.id}`} key={item.id}>
+                    <div className="title">{movie.title}</div>
+                    <NavLink to={`/detailsFilm/${movie.id}`} key={movie.id}>
                       {t("moreDetailed")}
                     </NavLink>
                     <p>
-                      {t("voteCount")} : {item.vote_count}
+                      {t("voteCount")} : {movie.vote_count}
                     </p>
                   </div>
                 </div>
@@ -97,15 +97,15 @@ export default function Home() {
           <h2>{t("popularSerial")}</h2>
           <div className="Popular-cinema">
             {getSerialPopular ? (
-              getSerialPopular.slice(0, 5).map((item) => (
-                <div className="films-list">
+              getSerialPopular.slice(0, 5).map((serial) => (
+                <div className="films-list" key={serial.id}>
                   <div className="films-list-image">
-                    <div className="rate">{item.vote_average.toFixed(1)}</div>
-                    <NavLink to={`/detailsFilm/${item.id}`} key={item.id}>
+                    <div className="rate">{serial.vote_average.toFixed(1)}</div>
+                    <NavLink to={`/detailsFilm/${serial.id}`} key={serial.id}>
                       <img
                         src={
                           "https://image.tmdb.org/t/p/original/" +
-                          item.poster_path
+                          serial.poster_path
                         }
                         alt=""
                       />
@@ -113,14 +113,14 @@ export default function Home() {
                   </div>
                   <div className="films-list-descript">
                     <span className="release-date">
-                      {t("dataRelease")}: {item.first_air_date}
+                      {t("dataRelease")}: {serial.first_air_date}
                     </span>
-                    <div className="title">{item.name}</div>
-                    <NavLink to={`/detailsFilm/${item.id}`} key={item.id}>
+                    <div className="title">{serial.name}</div>
+                    <NavLink to={`/detailsFilm/${serial.id}`} key={serial.id}>
                       {t("moreDetailed")}
                     </NavLink>
                     <p>
-                      {t("voteCount")} : {item.vote_count}
+                      {t("voteCount")} : {serial.vote_count}
                     </p>
                   </div>
                 </div>
