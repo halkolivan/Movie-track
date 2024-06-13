@@ -47,6 +47,8 @@ export const getCombinedPerson = createAsyncThunk(
   }
 );
 
+
+
 const detailPersonSlice = createSlice({
   name: "detailsPerson",
   initialState: {

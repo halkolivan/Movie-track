@@ -61,20 +61,7 @@ export const getRecommendatFilm = createAsyncThunk(
     }
   }
 );
-export const getCombinedPerson = createAsyncThunk(
-  "combinedPersonRequest/getCombinedPerson",
-  async (data, { rejectedWithValue }) => {
-    try {
-      const response = await Request().get(
-        `movie/${data.id}/recommendations?language=${data.language}&page=${data.page}`
-      );
-      return response.data;
-    } catch (error) {
-      console.log(error);
-      return rejectedWithValue(error.response.data);
-    }
-  }
-);
+
 
 const detailFilmsSlice = createSlice({
   name: "detailFilm",

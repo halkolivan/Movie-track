@@ -8,6 +8,7 @@ import {
   getExternalPerson,
   getCombinedPerson,
 } from "../store/slices/detailsPerson";
+import { getCreditsPerson } from "../store/slices/detailsCinema";
 
 // Styles
 import "src/assets/styles/components/DetailPerson.scss";
@@ -28,12 +29,14 @@ export default function DetailPerson() {
     dispatch(getDetailPerson({ id: id, language: i18n.language }));
     dispatch(getExternalPerson({ id: id, language: i18n.language }));
     dispatch(getCombinedPerson({ id: id, language: i18n.language }));
+    dispatch(getCreditsPerson({ id: id, language: i18n.language }));
   }, [id, i18n.language]);
 
   //Данные Актёра
   const requestDetailPerson = useSelector(
     (state) => state.detailsPerson.results
   );
+
   // Данные соцсетей
   const requestExternal = useSelector(
     (state) => state.detailsPerson.resultsExt
@@ -45,7 +48,7 @@ export default function DetailPerson() {
   const firstCombidenContent = Array.isArray(requestCombined.cast)
     ? requestCombined.cast.slice(0, 5)
     : [];
-  console.log("\x1b[34m\x1b[3m%s\x1b[0m", "Combined", firstCombidenContent);
+  console.log("\x1b[34m\x1b[3m%s\x1b[0m", "Combined", requestCombined);
 
   const loading = useSelector((state) => state.detailsPerson.loading);
 
@@ -73,15 +76,98 @@ export default function DetailPerson() {
                   <span className="actor-description-location">
                     Место рождения: {requestDetailPerson.place_of_birth}
                   </span>
+
                   <span className="actor-description-fame">
-                    Роль в фильме: __________________
+                    Известность за: {requestDetailPerson.known_for_department}
                   </span>
                   <span className="actor-description-known">
                     Так же исвестна: {requestDetailPerson.also_known_as}
                   </span>
-                  <span className="actor-description-social">
-                    Социальные сети:
-                  </span>
+                  <div className="actor-description-social">
+                    Социальные сети :{" "}
+                    <span>
+                      {requestExternal && requestExternal.instagram_id && (
+                        <a
+                          href={`https://www.instagram.com/${[
+                            requestExternal.instagram_id,
+                          ]}`}
+                          target="_blank"
+                        >
+                          Instagram
+                        </a>
+                      )}
+                    </span>
+                    <span>
+                      {requestExternal && requestExternal.facebook_id && (
+                        <a
+                          href={`https://www.facebook.com/${[
+                            requestExternal.facebook_id,
+                          ]}`}
+                          target="_blank"
+                        >
+                          facebook
+                        </a>
+                      )}
+                    </span>
+                    <span>
+                      {requestExternal && requestExternal.tiktok_id && (
+                        <a
+                          href={`https://www.tiktok.com/${[
+                            requestExternal.tiktok_id,
+                          ]}`}
+                          target="_blank"
+                        >
+                          tiktok
+                        </a>
+                      )}
+                    </span>
+                    <span>
+                      {requestExternal && requestExternal.tvrage_id && (
+                        <a
+                          href={`https://www.tvrage.com/${[
+                            requestExternal.tvrage_id,
+                          ]}`}
+                          target="_blank"
+                        >
+                          tvrage
+                        </a>
+                      )}
+                    </span>
+                    <span>
+                      {requestExternal && requestExternal.twitter_id && (
+                        <a
+                          href={`https://x.com/${[requestExternal.twitter_id]}`}
+                          target="_blank"
+                        >
+                          twitter
+                        </a>
+                      )}
+                    </span>
+                    <span>
+                      {requestExternal && requestExternal.wikidata_id && (
+                        <a
+                          href={`https://www.wikidata.org/${[
+                            requestExternal.wikidata_id,
+                          ]}`}
+                          target="_blank"
+                        >
+                          wikidata
+                        </a>
+                      )}
+                    </span>
+                    <span>
+                      {requestExternal && requestExternal.youtube_id && (
+                        <a
+                          href={`https://www.youtube.com/${[
+                            requestExternal.youtube_id,
+                          ]}`}
+                          target="_blank"
+                        >
+                          youtube
+                        </a>
+                      )}
+                    </span>
+                  </div>
                 </div>
               </div>
               <div className="biography">
@@ -154,7 +240,10 @@ export default function DetailPerson() {
                                 <span key={`${item.id}-${index}`}>
                                   Роль: {item.character}
                                 </span>
-                                <NavLink to={`/detailsFilm/${item.id}`} key={item.id}>
+                                <NavLink
+                                  to={`/detailsFilm/${item.id}`}
+                                  key={item.id}
+                                >
                                   <span>Подробнее: </span>
                                 </NavLink>
                               </div>

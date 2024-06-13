@@ -8,27 +8,26 @@ import { getFilmsPopular, getPopularSerial } from "../store/slices/home";
 // import styles
 import "src/assets/styles/pages/Home.scss";
 
+//Components
+import Search from "src/components/Search.jsx";
+
 //images
-import search from "src/assets/images/search.png";
+// import search from "src/assets/images/search.png";
 
 export default function Home() {
   const { t, i18n } = useTranslation();
   const [page, setPage] = useState(1);
   const dispatch = useDispatch();
-  // Вынемаем популярные фильмы
-  const getPopularFilms = useSelector((state) => state.home.results || []);
-  const firstFilms = getPopularFilms.slice(0, 5);
 
-  //Вынемаем популярные сериалы
+  const getPopularFilms = useSelector((state) => state.home.results || []);
   const getSerialPopular = useSelector(
     (state) => state.home.resultsSerial || []
   );
-  const firstSerials = getSerialPopular.slice(0, 5);
 
   useEffect(() => {
-    dispatch(getFilmsPopular({ page: page, language: i18n.language }));
-    dispatch(getPopularSerial({ page: page, language: i18n.language }));
-  }, [page, i18n.language]);
+    dispatch(getFilmsPopular({ page, language: i18n.language }));
+    dispatch(getPopularSerial({ page, language: i18n.language }));
+  }, [page, i18n.language, dispatch]);
 
   return (
     <section>
@@ -51,15 +50,16 @@ export default function Home() {
           </ul>
           <h3>{t("searchFilms")}</h3>
         </div>
-        <div className="search">
-          <img src={search} alt="" />
-          <input type="search" className="blinking-cursor" />
-        </div>
+
+        {/* Поиск */}
+
+        <Search films={getFilmsPopular} serials={getPopularSerial} />
+
         <div className="Popular">
           <h2>{t("popularFilms")}</h2>
           <div className="Popular-cinema">
-            {firstFilms ? (
-              firstFilms.map((item) => (
+            {getPopularFilms ? (
+              getPopularFilms.slice(0, 5).map((item) => (
                 <div className="films-list">
                   <div className="films-list-image">
                     <div className="rate">{item.vote_average.toFixed(1)}</div>
@@ -88,7 +88,7 @@ export default function Home() {
                 </div>
               ))
             ) : (
-              <p>Загрузка ...</p>
+              <p>{t("loading")} ...</p>
             )}
             <NavLink to="/popularFilmsPages">
               <div className="films-list-more">{t("more")}</div>
@@ -96,8 +96,8 @@ export default function Home() {
           </div>
           <h2>{t("popularSerial")}</h2>
           <div className="Popular-cinema">
-            {firstSerials ? (
-              firstSerials.map((item) => (
+            {getSerialPopular ? (
+              getSerialPopular.slice(0, 5).map((item) => (
                 <div className="films-list">
                   <div className="films-list-image">
                     <div className="rate">{item.vote_average.toFixed(1)}</div>
@@ -126,7 +126,7 @@ export default function Home() {
                 </div>
               ))
             ) : (
-              <p>Загрузка ...</p>
+              <p>{t("loading")} ...</p>
             )}
             <NavLink to="/popularSerialPages">
               <div className="films-list-more">{t("more")}</div>

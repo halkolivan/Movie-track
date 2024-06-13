@@ -20,6 +20,7 @@ export default function PopularFilmsPages() {
   const [page, setPage] = useState(1);
   const loading = useSelector((state) => state.home.loading);
   const requestPopularFilms = useSelector((state) => state.home.results);
+
   const firstFilms = requestPopularFilms
     ? requestPopularFilms.slice(0, 18)
     : [];
@@ -75,13 +76,13 @@ export default function PopularFilmsPages() {
                 </div>
               ))
             ) : (
-              <p>запрос отсутствует ...</p>
+              <p>{t("loading")}...</p>
             )}
           </div>
         ) : (
           <div className="loading">
             <img src={FilmRoll} alt="" />
-            <span>Загрузка ...</span>
+            <span>{t("loading")} ...</span>
           </div>
         )}
       </div>
@@ -90,7 +91,7 @@ export default function PopularFilmsPages() {
           breakLabel="..."
           onPageChange={handleClick}
           pageRangeDisplayed={5}
-          pageCount={44270}
+          pageCount={500}
           nextLabel="next >"
           previousLabel="< previous"
           renderOnZeroPageCount={null}

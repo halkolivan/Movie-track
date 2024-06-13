@@ -71,6 +71,19 @@ main {
       display: flex;
       flex-direction: row;
       overflow-x: auto;
+      ::-webkit-scrollbar {
+        width: 8px; /* Ширина ползунка */
+      }
+      ::-webkit-scrollbar-track {
+        background: #0075fa5e; /* Цвет фона трека */
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #0073fa; /* Цвет ползунка */
+        border-radius: 6px; /* Скругление углов ползунка */
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #1c86ff; /* Цвет ползунка при наведении */
+      }
       .none-response {
         display: flex;
         justify-content: center;
@@ -90,22 +103,6 @@ main {
         font-weight: 600;
         line-height: normal;
         margin-bottom: 10px;
-      }
-      ::-webkit-scrollbar {
-        width: 8px; /* Ширина ползунка */
-      }
-
-      ::-webkit-scrollbar-track {
-        background: #0075fa5e; /* Цвет фона трека */
-      }
-
-      ::-webkit-scrollbar-thumb {
-        background: #0073fa; /* Цвет ползунка */
-        border-radius: 6px; /* Скругление углов ползунка */
-      }
-
-      ::-webkit-scrollbar-thumb:hover {
-        background: #1c86ff; /* Цвет ползунка при наведении */
       }
     }
     .content-video-material-section {
@@ -279,6 +276,13 @@ main {
           li {
             list-style-type: none;
             border-bottom: 1px solid #1f242d;
+            a {
+              text-decoration: underline;
+              color: #fff;
+              span {
+                color: #fff;
+              }
+            }
             span:nth-of-type(2) {
               color: #fff;
             }
@@ -417,6 +421,13 @@ main {
         border: none;
         border-radius: 10px;
         cursor: pointer;
+
+        color: #ffffff;
+        font-family: Ubuntu, sans-serif;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
       }
     }
     .content-actors {

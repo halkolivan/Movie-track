@@ -115,7 +115,7 @@ export default function DetailsFilm() {
                     />
                   </div>
                   <button className="add-list" onClick={openPopWindow}>
-                    Добавить в список
+                    {t("addToList")}
                   </button>
                   {isOpen && (
                     <div
@@ -138,75 +138,96 @@ export default function DetailsFilm() {
                   )}
                 </div>
                 <div className="content-detail-description">
-                  <h1>Название: {requestDetal.title}</h1>
-                  <h2>Оригинальное название: {requestDetal.original_title}</h2>
+                  <h1>
+                    {t("title")}: {requestDetal.title}
+                  </h1>
+                  <h2>
+                    {t("originalTitle")}: {requestDetal.original_title}
+                  </h2>
 
                   <ul>
                     <li>
-                      <span>Оценка пользователей: </span>
+                      <span>{t("userEvaluation")}: </span>
                       <span>{requestDetal.vote_average.toFixed(1)}</span>
                     </li>
                     <li>
-                      <span>Популярность: </span>
+                      <span>{t("popularity")}: </span>
                       <span>{requestDetal.popularity.toFixed(1)}</span>
                     </li>
                     <li>
-                      <span>Страна производства: </span>
+                      <span>{t("countryOfProduction")}: </span>
                       <span>
                         {displayFn(requestDetal.production_countries)}
                       </span>
                     </li>
                     <li>
-                      <span>Язык: </span>
+                      <span>{t("lng")}: </span>
                       <span>{displayFn(requestDetal.spoken_languages)}</span>
                     </li>
-
+                    {requestPerson.crew && requestPerson.crew.length > 0 ? (
+                      requestPerson.crew.find(
+                        (item) => item.job === "Director"
+                      ) ? (
+                        <li>
+                          <span>{t("director")}: </span>
+                          {requestPerson.crew
+                            .filter((item) => item.job === "Director")
+                            .map((director) => (
+                              <NavLink
+                                to={`/detailPerson/${director.id}`}
+                                key={director.id}
+                              >
+                                <span>{director.name}</span>
+                              </NavLink>
+                            ))}
+                        </li>
+                      ) : (
+                        <p>{t("loading")}...</p>
+                      )
+                    ) : (
+                      <p>{t("loading")}...</p>
+                    )}
                     <li>
-                      <span>Режиссёр: </span>
-                      <span>__________</span>
-                    </li>
-
-                    <li>
-                      <span>Кинокомпании: </span>
+                      <span>{t("movieCompany")}: </span>
                       <span>
                         {displayFn(requestDetal.production_companies)}
                       </span>
                     </li>
                     <li>
-                      <span>Жанр: </span>
+                      <span>{t("genre")}: </span>
                       <span>{displayFn(requestDetal.genres)}</span>
                     </li>
                     <li>
-                      <span>Бюджет: </span>
+                      <span>{t("budget")}: </span>
                       <span>{requestDetal.budget} $</span>
                     </li>
                     <li>
-                      <span>Сборы: </span>
+                      <span>{t("revenue")}: </span>
                       <span>{requestDetal.revenue} $</span>
                     </li>
                     <li>
-                      <span>Дата выхода: </span>
+                      <span>{t("releaseDate")}: </span>
                       <span>{requestDetal.release_date}</span>
                     </li>
                     <li>
-                      <span>Статус: </span>
+                      <span>{t("status")}: </span>
                       <span>" {requestDetal.status} " </span>
                     </li>
                     <li>
-                      <span>Длительность: </span>
+                      <span>{t("runtime")}: </span>
                       <span>{requestDetal.runtime} мин.</span>
                     </li>
                   </ul>
                 </div>
               </div>
               <div className="content-description">
-                <h2>Описание фильма</h2>
+                <h2>{t("descriptionOfFilm")}</h2>
                 <p>{requestDetal.overview}</p>
               </div>
             </>
           )}
           <div className="content-video-material">
-            <h2>Видеоматериалы</h2>
+            <h2>{t("videoMaterials")}</h2>
             <div className="content-video-material-box">
               {requestTrailersDetail && requestTrailersDetail.length > 0 ? (
                 requestTrailersDetail.map((item) => (
@@ -216,7 +237,9 @@ export default function DetailsFilm() {
                       onClick={openTrailerWindow}
                     >
                       <YouTube videoId={item.key} id={item.id} />
-                      <h4>Дата выхода: {item.published_at}</h4>
+                      <h4>
+                        {t("releaseDate")}: {item.published_at}
+                      </h4>
                       <h2>{item.name}</h2>
                     </div>
                     {isOpenTrailer && (
@@ -238,13 +261,13 @@ export default function DetailsFilm() {
                   </div>
                 ))
               ) : (
-                <div className="none-response">Трейлеры отсутствуют</div>
+                <div className="none-response">{t("trlMss")}</div>
               )}
             </div>
           </div>
 
           <div className="content-actors">
-            <h2>Актёрский состав</h2>
+            <h2>{t("cast")}</h2>
             <div className="content-actors-carts">
               {firstActors && firstActors.length > 0 ? (
                 firstActors.map((item) => (
@@ -258,13 +281,15 @@ export default function DetailsFilm() {
                     />
                     <div className="actor-description">
                       <span>{item.name}</span>
-                      <span>Роль(и):{item.character}</span>
-                      <span>Подробнее</span>
+                      <span>
+                        {t("role")}:{item.character}
+                      </span>
+                      <span>{t("moreDetailed")}</span>
                     </div>
                   </NavLink>
                 ))
               ) : (
-                <p>Нет данных ...</p>
+                <p>{t("loading")} ...</p>
               )}
               <div className="full-list" onClick={openActorWindow}>
                 {t("more")}
@@ -282,7 +307,10 @@ export default function DetailsFilm() {
                     <div className="actors-more-count">
                       {requestPerson.cast && requestPerson.cast.length > 0 ? (
                         requestPerson.cast.map((item) => (
-                          <NavLink to={`/cartActor/${item.id}`} key={item.id}>
+                          <NavLink
+                            to={`/detailPerson/${item.id}`}
+                            key={item.id}
+                          >
                             <img
                               src={
                                 "https://image.tmdb.org/t/p/original/" +
@@ -292,13 +320,15 @@ export default function DetailsFilm() {
                             />
                             <div className="actor-description">
                               <span>{item.name}</span>
-                              <span>Роль(и):{item.character}</span>
-                              <span>Подробнее</span>
+                              <span>
+                                {t("role")}:{item.character}
+                              </span>
+                              <span>{t("moreDetailed")}</span>
                             </div>
                           </NavLink>
                         ))
                       ) : (
-                        <p>Что-то пошло не так ...</p>
+                        <p>{t("loading")} ...</p>
                       )}
                     </div>
                   </div>
@@ -307,7 +337,7 @@ export default function DetailsFilm() {
             </div>
           </div>
           <div className="content-similar">
-            <h2>Похожие кинокартины</h2>
+            <h2>{t("similarFilms")}</h2>
             <div className="content-similar-carts">
               {firstRecommendat && firstRecommendat.length > 0 ? (
                 firstRecommendat.map((item) => (
@@ -321,16 +351,21 @@ export default function DetailsFilm() {
                     />
                     <div className="cinema-description">
                       <span>{item.title}</span>
-                      <span>Дата выхода: {item.release_date}</span>
-                      <span>Популярность: {item.popularity.toFixed(0.1)}</span>
                       <span>
-                        Рейтинг: <span> {item.vote_average.toFixed(1)} </span>{" "}
+                        {t("dataRelease")}: {item.release_date}
+                      </span>
+                      <span>
+                        {t("popularity")}: {item.popularity.toFixed(0.1)}
+                      </span>
+                      <span>
+                        {t("rating")}:{" "}
+                        <span> {item.vote_average.toFixed(1)} </span>{" "}
                       </span>
                     </div>
                   </NavLink>
                 ))
               ) : (
-                <p>Отсутствие данных запроса ...</p>
+                <p>{t("loading")} ...</p>
               )}
               <button
                 className="similar-films"
@@ -363,19 +398,22 @@ export default function DetailsFilm() {
                             />
                             <div className="cinema-description">
                               <span>{item.title}</span>
-                              <span>Дата выхода: {item.release_date}</span>
                               <span>
-                                Популярность: {item.popularity.toFixed(0.1)}
+                                {t("dataRelease")}: {item.release_date}
                               </span>
                               <span>
-                                Рейтинг:{" "}
+                                {t("popularity")}:{" "}
+                                {item.popularity.toFixed(0.1)}
+                              </span>
+                              <span>
+                                {t("rating")}:{" "}
                                 <span> {item.vote_average.toFixed(1)} </span>{" "}
                               </span>
                             </div>
                           </NavLink>
                         ))
                       ) : (
-                        <p> Что-то пошло не так ... </p>
+                        <p> {t("loading")} ... </p>
                       )}
                     </div>
                   </div>
@@ -385,7 +423,7 @@ export default function DetailsFilm() {
           </div>
         </div>
       ) : (
-        <p>Загрузка ...</p>
+        <p>{t("loading")}...</p>
       )}
     </main>
   );
