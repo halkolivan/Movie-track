@@ -11,10 +11,10 @@ import FilmRoll from "src/assets/images/filmRoll.png";
 import "src/assets/styles/pages/DetailsFilm.scss";
 
 import {
-  getDetailFilm,
-  getTrailersDetail,
-  getCreditsPerson,
-  getRecommendatFilm,
+  getDetailSerial,
+  getTrailersDetailSerial,
+  getCreditsPersonSerial,
+  getRecommendatSerial,
 } from "../store/slices/detailsCinema";
 
 export default function DetailsFilm() {
@@ -62,36 +62,42 @@ export default function DetailsFilm() {
 
   //Данные фильма
   useEffect(() => {
-    dispatch(getDetailFilm({ id: id, language: i18n.language }));
-    dispatch(getTrailersDetail({ id: id, language: i18n.language }));
-    dispatch(getCreditsPerson({ id: id, language: i18n.language }));
+    dispatch(getDetailSerial({ id: id, language: i18n.language }));
+    dispatch(getTrailersDetailSerial({ id: id, language: i18n.language }));
+    dispatch(getCreditsPersonSerial({ id: id, language: i18n.language }));
   }, [id, i18n.language]);
   useEffect(() => {
     dispatch(
-      getRecommendatFilm({ id: id, language: i18n.language, page: page })
+      getRecommendatSerial({ id: id, language: i18n.language, page: page })
     );
   }, [id, i18n.language, page]);
 
-  //Описание фильма
-  const requestDetal = useSelector((state) => state.detailMovie.resultsDfilm);
+  // //Описание фильма
+  // const requestDetalSerial = useSelector((state) => state.detailFilm.resultsDfilm);
+  //Описание сериала
+  const requestDetalSerial = useSelector(
+    (state) => state.detailMovie.resultsDserial
+  );
 
-  //Трейлер фильма
-  const requestTrailersDetail = useSelector(
-    (state) => state.detailMovie.results || []
+  //Трейлер сериала
+  const requestTrailersDetailSerial = useSelector(
+    (state) => state.detailMovie.resultsTrailerSerial || []
   );
 
   //Перечень актёров
-  const requestPerson = useSelector((state) => state.detailMovie.actors || []);
-  const firstActors = requestPerson.cast ? requestPerson.cast.slice(0, 5) : [];
-  console.log("\x1b[31m\x1b[4m%s\x1b[0m", "Crew", requestPerson.crew);
+  const requestPerson = useSelector(
+    (state) => state.detailMovie.actorsSerial || []
+  );
 
   //Походие кинокартины
   const requestRecommandat = useSelector(
-    (state) => state.detailMovie.recommendat || []
+    (state) => state.detailMovie.recommendatSerial || []
   );
-  const firstRecommendat = requestRecommandat.results
-    ? requestRecommandat.results.slice(0, 5)
-    : [];
+  console.log(
+    "\x1b[36m\x1b[4m%s\x1b[0m",
+    "recom components",
+    requestRecommandat
+  );
 
   //Функция вывода всех значений массива
   function displayFn(el) {
@@ -104,7 +110,7 @@ export default function DetailsFilm() {
     <main>
       {!loading ? (
         <div className="content-general">
-          {requestDetal && (
+          {requestDetalSerial && (
             <>
               <div className="content-detail">
                 <div className="content-detail-photo">
@@ -112,9 +118,9 @@ export default function DetailsFilm() {
                     <img
                       src={
                         "https://image.tmdb.org/t/p/original/" +
-                        requestDetal.poster_path
+                        requestDetalSerial.poster_path
                       }
-                      alt={requestDetal.title}
+                      alt={requestDetalSerial.title}
                     />
                   </div>
                   <button className="add-list" onClick={openPopWindow}>
@@ -142,30 +148,32 @@ export default function DetailsFilm() {
                 </div>
                 <div className="content-detail-description">
                   <h1>
-                    {t("title")}: {requestDetal.title}
+                    {t("title")}: {requestDetalSerial.title}
                   </h1>
                   <h2>
-                    {t("originalTitle")}: {requestDetal.original_title}
+                    {t("originalTitle")}: {requestDetalSerial.original_title}
                   </h2>
 
                   <ul>
                     <li>
                       <span>{t("userEvaluation")}: </span>
-                      <span>{requestDetal.vote_average.toFixed(1)}</span>
+                      <span>{requestDetalSerial.vote_average.toFixed(1)}</span>
                     </li>
                     <li>
                       <span>{t("popularity")}: </span>
-                      <span>{requestDetal.popularity.toFixed(1)}</span>
+                      <span>{requestDetalSerial.popularity.toFixed(1)}</span>
                     </li>
                     <li>
                       <span>{t("countryOfProduction")}: </span>
                       <span>
-                        {displayFn(requestDetal.production_countries)}
+                        {displayFn(requestDetalSerial.production_countries)}
                       </span>
                     </li>
                     <li>
                       <span>{t("lng")}: </span>
-                      <span>{displayFn(requestDetal.spoken_languages)}</span>
+                      <span>
+                        {displayFn(requestDetalSerial.spoken_languages)}
+                      </span>
                     </li>
                     {requestPerson.crew && requestPerson.crew.length > 0 ? (
                       requestPerson.crew.find(
@@ -193,47 +201,48 @@ export default function DetailsFilm() {
                     <li>
                       <span>{t("movieCompany")}: </span>
                       <span>
-                        {displayFn(requestDetal.production_companies)}
+                        {displayFn(requestDetalSerial.production_companies)}
                       </span>
                     </li>
                     <li>
                       <span>{t("genre")}: </span>
-                      <span>{displayFn(requestDetal.genres)}</span>
+                      <span>{displayFn(requestDetalSerial.genres)}</span>
                     </li>
                     <li>
                       <span>{t("budget")}: </span>
-                      <span>{requestDetal.budget} $</span>
+                      <span>{requestDetalSerial.budget} $</span>
                     </li>
                     <li>
                       <span>{t("revenue")}: </span>
-                      <span>{requestDetal.revenue} $</span>
+                      <span>{requestDetalSerial.revenue} $</span>
                     </li>
                     <li>
                       <span>{t("releaseDate")}: </span>
-                      <span>{requestDetal.release_date}</span>
+                      <span>{requestDetalSerial.release_date}</span>
                     </li>
                     <li>
                       <span>{t("status")}: </span>
-                      <span>" {requestDetal.status} " </span>
+                      <span>" {requestDetalSerial.status} " </span>
                     </li>
                     <li>
                       <span>{t("runtime")}: </span>
-                      <span>{requestDetal.runtime} мин.</span>
+                      <span>{requestDetalSerial.runtime} мин.</span>
                     </li>
                   </ul>
                 </div>
               </div>
               <div className="content-description">
                 <h2>{t("descriptionOfFilm")}</h2>
-                <p>{requestDetal.overview}</p>
+                <p>{requestDetalSerial.overview}</p>
               </div>
             </>
           )}
           <div className="content-video-material">
             <h2>{t("videoMaterials")}</h2>
             <div className="content-video-material-box">
-              {requestTrailersDetail && requestTrailersDetail.length > 0 ? (
-                requestTrailersDetail.map((item) => (
+              {requestTrailersDetailSerial &&
+              requestTrailersDetailSerial.length > 0 ? (
+                requestTrailersDetailSerial.map((item) => (
                   <div className="content-video-material-section" key={item.id}>
                     <div
                       className="content-video-material-section-trailer"
@@ -272,8 +281,8 @@ export default function DetailsFilm() {
           <div className="content-actors">
             <h2>{t("cast")}</h2>
             <div className="content-actors-carts">
-              {firstActors && firstActors.length > 0 ? (
-                firstActors.map((item) => (
+              {requestPerson && requestPerson.length > 0 ? (
+                requestPerson.slice(0, 5).map((item) => (
                   <NavLink to={`/detailPerson/${item.id}`} key={item.id}>
                     <img
                       src={
@@ -308,8 +317,8 @@ export default function DetailsFilm() {
                       <button onClick={closeActorWindow}>+</button>
                     </div>
                     <div className="actors-more-count">
-                      {requestPerson.cast && requestPerson.cast.length > 0 ? (
-                        requestPerson.cast.map((item) => (
+                      {requestPerson && requestPerson.length > 0 ? (
+                        requestPerson.map((item) => (
                           <NavLink
                             to={`/detailPerson/${item.id}`}
                             key={item.id}
@@ -342,20 +351,21 @@ export default function DetailsFilm() {
           <div className="content-similar">
             <h2>{t("similarFilms")}</h2>
             <div className="content-similar-carts">
-              {firstRecommendat && firstRecommendat.length > 0 ? (
-                firstRecommendat.map((item) => (
-                  <NavLink to={`/detailsFilm/${item.id}`} key={item.id}>
+              {requestRecommandat.results &&
+              requestRecommandat.results.length > 0 ? (
+                requestRecommandat.results.slice(0, 5).map((item) => (
+                  <NavLink to={`/detailsSerial/${item.id}`} key={item.id}>
                     <img
                       src={
                         "https://image.tmdb.org/t/p/original/" +
                         item.poster_path
                       }
-                      alt={item.title}
+                      alt={item.name}
                     />
                     <div className="cinema-description">
-                      <span>{item.title}</span>
+                      <span>{item.name}</span>
                       <span>
-                        {t("dataRelease")}: {item.release_date}
+                        {t("dataRelease")}: {item.first_air_date}
                       </span>
                       <span>
                         {t("popularity")}: {item.popularity.toFixed(0.1)}
@@ -391,7 +401,10 @@ export default function DetailsFilm() {
                       {requestRecommandat.results &&
                       requestRecommandat.results.length > 0 ? (
                         requestRecommandat.results.map((item) => (
-                          <NavLink to={`/detailsFilm/${item.id}`} key={item.id}>
+                          <NavLink
+                            to={`/detailsSerial/${item.id}`}
+                            key={item.id}
+                          >
                             <img
                               src={
                                 "https://image.tmdb.org/t/p/original/" +

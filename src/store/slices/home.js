@@ -56,11 +56,30 @@ export const getPopularSerial = createAsyncThunk(
   }
 );
 
+// Поиск
+export const getSearch = createAsyncThunk(
+  "searchCinema/getSearch",
+  async (data, { rejectedWithValue }) => {
+    try {
+      const response = await Request().get(
+        `search/collection?include_adult=false&language=${data.language}&page=${data.page}`
+      );
+      console.log("\x1b[35m\x1b[4m%s\x1b[0m", "Поиск из среза", response);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      return rejectedWithValue(error.response.data);
+    }
+  }
+);
+
 const homeSlice = createSlice({
   name: "home",
   initialState: {
     loading: true,
     results: undefined,
+    search: [],
+    searchError: null,
     resultsSerial: undefined,
     serialError: undefined,
     popularError: undefined,
@@ -85,6 +104,14 @@ const homeSlice = createSlice({
       })
       .addCase(getPopularSerial.rejected, (state, { payload }) => {
         state.serialError = payload;
+      })
+      .addCase(getSearch.fulfilled, (state, { payload }) => {
+        console.log("Данные поиска из reducer", payload);
+        state.search = payload.results;
+        state.loading = false;
+      })
+      .addCase(getSearch.rejected, (state, { payload }) => {
+        state.searchError = payload;
       });
   },
 });

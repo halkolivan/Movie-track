@@ -41,6 +41,7 @@
   "rating": "Rating",
   "nameActor": "The actor's name",
   "dateBirth": "Date of birth",
+  "placeBirth": "Place of birth",
   "fameFor": "Fame for",
   "alsoKnown": "Also known(on)",
   "biography": "Biography",

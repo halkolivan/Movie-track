@@ -1,56 +1,62 @@
 //Import components
-import { RouterProvider, createBrowserRouter } from 'react-router-dom'
-import Template from './Template'
-import './i18n'
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import Template from "./Template";
+import "./i18n";
 
 //Import pages
-import Home from './pages/Home'
-import Error from './pages/Error'
-import WarningLists from './components/WarningLists'
-import DetailsFilm from './components/DetailsFilm'
-import DetailPerson from './components/DetailPerson'
-import PopularFilmsPages from './pages/PopularFilmsPages'
-import PopularSerialPages from './pages/PopularSerialPages'
+import Home from "./pages/Home";
+import Error from "./pages/Error";
+import WarningLists from "./components/WarningLists";
+import DetailsFilm from "./components/DetailsFilm";
+import DetailsSerial from "./components/DetailsSerial";
+import DetailPerson from "./components/DetailPerson";
+import PopularFilmsPages from "./pages/PopularFilmsPages";
+import PopularSerialPages from "./pages/PopularSerialPages";
 
 export default function Router() {
   const routing = createBrowserRouter([
     {
-      path: '/',
+      path: "/",
       element: <Template />,
       children: [
         {
-          path: '/',
+          path: "/",
           element: <Home />,
         },
         {
-          path: '/warningLists',
+          path: "/warningLists",
           element: <WarningLists />,
         },
 
         {
-          path: '/detailsFilm/:id',
+          path: "/detailsFilm/:id",
           element: <DetailsFilm />,
         },
 
         {
-          path: '/detailPerson/:id',
+          path: "/detailsSerial/:id",
+          element: <DetailsSerial />,
+        },
+
+        {
+          path: "/detailPerson/:id",
           element: <DetailPerson />,
         },
         {
-          path: '/popularFilmsPages',
+          path: "/popularFilmsPages",
           element: <PopularFilmsPages />,
         },
         {
-          path: '/popularSerialPages',
+          path: "/popularSerialPages",
           element: <PopularSerialPages />,
         },
         {
-          path: '*',
+          path: "*",
           element: <Error />,
         },
       ],
     },
-  ])
+  ]);
 
-  return <RouterProvider router={routing} />
+  return <RouterProvider router={routing} />;
 }

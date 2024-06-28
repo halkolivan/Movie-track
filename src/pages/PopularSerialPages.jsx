@@ -20,9 +20,7 @@ export default function PopularSerialPages() {
   const [page, setPage] = useState(1);
   const loading = useSelector((state) => state.home.loading);
   const requestPopularSerial = useSelector((state) => state.home.resultsSerial);
-  const firstSerial = requestPopularSerial
-    ? requestPopularSerial.slice(0, 18)
-    : [];
+  
 
   //Function for request popular films
   useEffect(() => {
@@ -44,16 +42,16 @@ export default function PopularSerialPages() {
       <div className="films-page">
         {!loading ? (
           <div className="films-page-content">
-            {firstSerial ? (
-              firstSerial.map((item) => (
-                <div className="films-list">
+            {requestPopularSerial ? (
+              requestPopularSerial.map((elem) => (
+                <div className="films-list" key={elem}>
                   <div className="films-list-image">
-                    <div className="rate">{item.vote_average.toFixed(1)}</div>
-                    <NavLink to={`/detailsFilm/${item.id}`} key={item.id}>
+                    <div className="rate">{elem.vote_average.toFixed(1)}</div>
+                    <NavLink to={`/detailsFilm/${elem.id}`} key={elem.id}>
                       <img
                         src={
                           "https://image.tmdb.org/t/p/original/" +
-                          item.poster_path
+                          elem.poster_path
                         }
                         alt=""
                       />
@@ -61,14 +59,14 @@ export default function PopularSerialPages() {
                   </div>
                   <div className="films-list-descript">
                     <span className="release-data">
-                      {t("dataRelease")}:{item.first_air_date}
+                      {t("dataRelease")}:{elem.first_air_date}
                     </span>
-                    <div className="title">{item.name}</div>
-                    <NavLink to={`/detailsFilm/${item.id}`} key={item.id}>
+                    <div className="title">{elem.name}</div>
+                    <NavLink to={`/detailsFilm/${elem.id}`} key={elem.id}>
                       {t("moreDetailed")}
                     </NavLink>
                     <p>
-                      {t("voteCount")} : {item.vote_count}
+                      {t("voteCount")} : {elem.vote_count}
                     </p>
                   </div>
                 </div>

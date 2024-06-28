@@ -68,23 +68,23 @@ export default function DetailPerson() {
                 />
                 <div className="actor-description">
                   <span className="actor-description-name">
-                    Имя актёра: {requestDetailPerson.name}
+                    {t("nameActor")}: {requestDetailPerson.name}
                   </span>
                   <span className="actor-description-born">
-                    Дата рождения: {requestDetailPerson.birthday}
+                    {t("dateBirth")}: {requestDetailPerson.birthday}
                   </span>
                   <span className="actor-description-location">
-                    Место рождения: {requestDetailPerson.place_of_birth}
+                    {t("placeBirth")}: {requestDetailPerson.place_of_birth}
                   </span>
 
                   <span className="actor-description-fame">
-                    Известность за: {requestDetailPerson.known_for_department}
+                    {t("fameFor")}: {requestDetailPerson.known_for_department}
                   </span>
                   <span className="actor-description-known">
-                    Так же исвестна: {requestDetailPerson.also_known_as}
+                    {t("alsoKnown")}: {requestDetailPerson.also_known_as}
                   </span>
                   <div className="actor-description-social">
-                    Социальные сети :{" "}
+                    {t("socialNetwork")} :{" "}
                     <span>
                       {requestExternal && requestExternal.instagram_id && (
                         <a
@@ -171,7 +171,7 @@ export default function DetailPerson() {
                 </div>
               </div>
               <div className="biography">
-                <h2>Биография</h2>
+                <h2>{t("biography")}</h2>
                 <p>
                   {requestDetailPerson.biography
                     ? requestDetailPerson.biography
@@ -179,7 +179,7 @@ export default function DetailPerson() {
                 </p>
               </div>
               <div className="filmography">
-                <h2>Фильмография</h2>
+                <h2>{t("filmography")}</h2>
                 <div className="filmography-list">
                   {firstCombidenContent && firstCombidenContent.length > 0 ? (
                     firstCombidenContent.map((item, index) => (
@@ -192,8 +192,12 @@ export default function DetailPerson() {
                           alt={item.name}
                         />
                         <div className="descript-similar-content">
-                          <span>Дата выхода: {item.release_date}</span>
-                          <span>Название: {item.title}</span>
+                          <span>
+                            {t("dataRelease")}: {item.release_date}
+                          </span>
+                          <span>
+                            {t("title")}: {item.title}
+                          </span>
                           <NavLink
                             to={`/detailsFilm/${item.id}`}
                             key={`${item.id}-${index}`}
@@ -204,14 +208,14 @@ export default function DetailPerson() {
                       </div>
                     ))
                   ) : (
-                    <p>Загрузка...</p>
+                    <p>{t("loading")}...</p>
                   )}
 
                   <button onClick={openPopWindow}>{t("more")}</button>
                   {isOpen && (
                     <section className="filmography-list-more">
                       <div className="filmography-title">
-                        <h2>Фильмография</h2>
+                        <h2>{t("filmography")}</h2>
                         <button onClick={closePopWindow}>+</button>
                       </div>
 
@@ -235,22 +239,26 @@ export default function DetailPerson() {
                               </div>
 
                               <div className="description">
-                                <span>Название: {item.title}</span>
-                                <span>Дата выхода: {item.release_date}</span>
+                                <span>
+                                  {t("title")}: {item.title}
+                                </span>
+                                <span>
+                                  {t("dataRelease")}: {item.release_date}
+                                </span>
                                 <span key={`${item.id}-${index}`}>
-                                  Роль: {item.character}
+                                  {t("role")}: {item.character}
                                 </span>
                                 <NavLink
                                   to={`/detailsFilm/${item.id}`}
                                   key={item.id}
                                 >
-                                  <span>Подробнее: </span>
+                                  <span>{t("moreDetailed")}: </span>
                                 </NavLink>
                               </div>
                             </div>
                           ))
                         ) : (
-                          <p> Загрузка ... </p>
+                          <p> {t("loading")} ... </p>
                         )}
                       </div>
                     </section>
@@ -261,7 +269,7 @@ export default function DetailPerson() {
           )}
         </div>
       ) : (
-        <p>Загрузка ...</p>
+        <p>{t("loading")} ...</p>
       )}
     </main>
   );

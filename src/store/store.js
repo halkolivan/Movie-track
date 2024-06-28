@@ -7,7 +7,7 @@ import DetailsPerson from "../store/slices/detailsPerson";
 export const store = configureStore({
   reducer: {
     home: Home,
-    detailFilm: DetailsCinema,
+    detailMovie: DetailsCinema,
     detailsPerson: DetailsPerson,
   },
 });

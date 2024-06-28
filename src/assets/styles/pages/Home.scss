@@ -1,21 +1,26 @@
 a {
   text-decoration: none;
 }
+
 section {
   background: #1f242d;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
   .home {
     display: flex;
     flex-direction: column;
-    margin-left: auto;
-    margin-right: auto;
     background: #1f242d;
-    width: 1400px;
-    height: auto;
+    max-width: 1400px;
+    width: 100%;
+    height: unset;
+
     .search {
       display: flex;
       position: relative;
       align-items: center;
-      
+
       .blinking-cursor {
         color: #fff;
       }
@@ -24,7 +29,8 @@ section {
         padding-right: 10px;
         border-radius: 50px;
         border: 1px solid #b1b1b1;
-        width: 1395px;
+        max-width: 1395px;
+        width: 100%;
         height: 45px;
         font-family: Fira, sans-serif;
         font-size: 22px;
@@ -41,8 +47,10 @@ section {
     .description {
       display: flex;
       flex-direction: column;
+      flex-wrap: wrap;
       margin-top: 80px;
-      width: 1395px;
+      max-width: 1395px;
+      width: 100%;
       gap: 20px;
       color: #fff;
       font-family: Roboto, sans-serif;
@@ -50,6 +58,7 @@ section {
       font-style: normal;
       font-weight: 400;
       line-height: normal;
+
       h3 {
         margin-top: 20px;
         margin-bottom: 20px;
@@ -83,10 +92,11 @@ section {
         line-height: normal;
       }
     }
-    .Popular {
+    .popular {
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
+      align-items: center;
       margin-top: 30px;
       margin-bottom: 40px;
       color: #fff;
@@ -95,14 +105,79 @@ section {
       font-style: normal;
       font-weight: 400;
       line-height: normal;
-      .Popular-cinema {
+      .loading {
         display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
+        position: relative;
+        height: unset;
+        img {
+          width: 50px;
+          height: 50px;
+        }
+        span {
+          color: #fff;
+          font-family: Roboto, sans-serif;
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: normal;
+        }
+      }
+
+      .popular-cinema {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
         margin-top: 20px;
         margin-bottom: 40px;
-        width: 1396px;
-        max-height: 410px;
+        max-width: 1396px;
+        width: 100%;
+        min-height: 360px;
         gap: 40px;
+        // .loading {
+        //   display: flex;
+        //   flex-direction: row;
+        //   align-items: center;
+        //   position: relative;
+        //   max-width: 1400px;
+        //   width: 100%;
+        //   height: unset;
+        //   justify-content: flex-end;
+        //   a {
+        //     height: 100%;
+        //     color: #fff;
+        //     .films-list-more {
+        //       display: flex;
+        //       justify-content: center;
+        //       align-items: center;
+        //       background: #1f242d;
+        //       width: 155px;
+        //       height: 100%;
+        //       padding: 22px;
+        //       border-radius: 5%;
+        //       box-shadow: 0 0 27px #0000029a;
+        //       cursor: pointer;
+        //     }
+        //   }
+        //   img {
+        //     width: 50px;
+        //     height: 50px;
+        //   }
+        //   span {
+        //     color: #fff;
+        //     font-family: Roboto, sans-serif;
+        //     font-size: 16px;
+        //     font-style: normal;
+        //     font-weight: 400;
+        //     line-height: normal;
+        //   }
+        // }
         a {
+          display: flex;
+          height: 100%;
           color: #fff;
           .films-list-more {
             display: flex;
@@ -110,13 +185,14 @@ section {
             align-items: center;
             background: #1f242d;
             width: 155px;
-            height: 340px;
+            height: 100%;
             padding: 22px;
             border-radius: 5%;
             box-shadow: 0 0 27px #0000029a;
             cursor: pointer;
           }
         }
+
         .films-list-more:hover {
           color: #0073fa;
           transition: color 0.3s ease;
@@ -187,5 +263,26 @@ section {
         }
       }
     }
+  }
+}
+@media (min-width: 320px) and (max-width: 1440px) {
+  section .home {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  section .home .description * {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+  section .home .popular {
+    padding-left: 5px;
+    align-items: center;
+  }
+  section .home .popular .popular-cinema .films-list {
+    width: 300px;
+  }
+  section .home .popular .popular-cinema a .films-list-more {
+    width: 300px;
+    height: 40px;
   }
 }

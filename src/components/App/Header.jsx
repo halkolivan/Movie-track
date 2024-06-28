@@ -9,14 +9,8 @@ import { useState } from "react";
 import "src/assets/styles/app/header.scss";
 
 // Функция для придания Header свойства position: sticky
-export default function Header({ style, ...props }) {
-  const headerStyle = {
-    display: "flex",
-    position: "sticky",
-    top: 0,
-    
-    ...style 
-  };
+export default function Header() {
+  
   const { t, i18n } = useTranslation();
   const changeLanguage = (language) => {
     i18n.changeLanguage(language);
@@ -31,7 +25,7 @@ export default function Header({ style, ...props }) {
   };
 
   return (
-    <header style={headerStyle} {...props}>
+    <header>
       <div className="components-menu">
         <div className="left-side">
           <NavLink to="/">

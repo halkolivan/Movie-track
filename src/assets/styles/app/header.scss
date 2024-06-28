@@ -1,19 +1,25 @@
 @import "fonts.scss";
 * {
   margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
 }
+
 header {
   display: flex;
   align-items: center;
   justify-content: center;
-  left: 0;
+  position: fixed;
   min-height: 63px;
+  height: unset;
   width: 100%;
   z-index: 100;
   background: #282f43;
   .components-menu {
     display: flex;
-    width: 1400px;
+    flex-wrap: wrap;
+    max-width: 1400px;
+    width: 100%;
     justify-content: space-between;
     background: #282f43;
     .right-side {
@@ -208,5 +214,18 @@ header {
         color: #0073fa;
       }
     }
+  }
+}
+@media (min-width: 320px) and (max-width: 580px) {
+  header .components-menu {
+    justify-content: center;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+@media (min-width: 581px) and (max-width: 1399px) {
+  header .components-menu {
+    padding-left: 10px;
+    padding-right: 10px;
   }
 }

@@ -16,14 +16,43 @@ export default function PopularFilmsPages() {
   const dispatch = useDispatch();
   const { t, i18n } = useTranslation();
 
+  const [pageRangeDisplayed, setPageRangeDisplayed] = useState(5);
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 480px)");
+
+    const handleMediaQueryChange = (e) => {
+      if (e.matches) {
+        setPageRangeDisplayed(1);
+      } else {
+        setPageRangeDisplayed(5);
+      }
+    };
+
+    handleMediaQueryChange(mediaQuery); // Устанавливаем начальное значение
+    mediaQuery.addEventListener("change", handleMediaQueryChange); // Слушатель изменения
+
+    return () => {
+      mediaQuery.removeEventListener("change", handleMediaQueryChange); // Удаление слушателя
+    };
+  }, []);
+  useEffect(() => {
+    console.log('pageRangeDisplayed updated:', pageRangeDisplayed);
+  }, [pageRangeDisplayed]);
+
   //Initialization state manager
   const [page, setPage] = useState(1);
   const loading = useSelector((state) => state.home.loading);
   const requestPopularFilms = useSelector((state) => state.home.results);
 
-  const firstFilms = requestPopularFilms
-    ? requestPopularFilms.slice(0, 18)
-    : [];
+  if (requestPopularFilms && requestPopularFilms.length > 0) {
+    console.log("films", requestPopularFilms);
+  } else {
+    console.log("Массив не найден");
+  }
+
+  if (page >= 1) {
+    console.log("page films", page);
+  }
 
   //Function for request popular films
   useEffect(() => {
@@ -46,9 +75,9 @@ export default function PopularFilmsPages() {
       <div className="films-page">
         {!loading ? (
           <div className="films-page-content">
-            {firstFilms ? (
-              firstFilms.map((item) => (
-                <div className="films-list">
+            {requestPopularFilms ? (
+              requestPopularFilms.map((item) => (
+                <div className="films-list" key={item.id}>
                   <div className="films-list-image">
                     <div className="rate">{item.vote_average.toFixed(1)}</div>
                     <NavLink to={`/detailsFilm/${item.id}`} key={item.id}>
@@ -86,11 +115,12 @@ export default function PopularFilmsPages() {
           </div>
         )}
       </div>
+
       <div className="page-numbers">
         <ReactPaginate
           breakLabel="..."
           onPageChange={handleClick}
-          pageRangeDisplayed={5}
+          pageRangeDisplayed={pageRangeDisplayed}
           pageCount={500}
           nextLabel="next >"
           previousLabel="< previous"

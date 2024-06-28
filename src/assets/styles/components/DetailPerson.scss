@@ -19,19 +19,21 @@ main {
       display: flex;
       flex-direction: row;
       justify-content: space-between;
-      width: 1400px;
-      height: 454px;
+      width: 100%;
+      min-height: 454px;
       img {
         border-radius: 2%;
-        width: 300px;
-        height: 454px;
+        max-width: 300px;
+        max-height: 454px;
         background: #3c485a;
       }
       .actor-description {
         display: flex;
         flex-direction: column;
+        flex-wrap: wrap;
         gap: 20px;
-        width: 1080px;
+        max-width: 1080px;
+        width: 100%;
         margin-top: 10px;
         margin-left: 60px;
         span {
@@ -68,7 +70,9 @@ main {
     .biography {
       display: flex;
       flex-direction: column;
-      width: 1400px;
+      flex-wrap: wrap;
+      max-width: 1400px;
+      width: 100%;
       gap: 10px;
       max-width: unset;
       min-height: 200px;
@@ -76,6 +80,8 @@ main {
       margin-top: 20px;
 
       h2 {
+        display: flex;
+        justify-content: space-around;
         color: #fff;
         font-family: Fira, sans-serif;
         font-size: 30px;
@@ -100,10 +106,12 @@ main {
     .filmography {
       display: flex;
       flex-direction: column;
-      margin-bottom: 100px;
+      margin-bottom: 50px;
       margin-top: 20px;
-      width: 1400px;
-      height: 538px;
+      max-width: 1400px;
+      width: 100%;
+      min-height: 538px;
+      height: unset;
       gap: 20px;
       h2 {
         color: #fff;
@@ -123,8 +131,9 @@ main {
           display: flex;
           flex-direction: row;
           flex-wrap: nowrap;
-          width: 453px;
-          height: auto;
+          max-width: 453px;
+          width: 100%;
+          height: unset;
           border-radius: 3%;
           gap: 20px;
           box-shadow: 0 0 20px rgba(0, 0, 2, 0.4117647059);
@@ -163,19 +172,11 @@ main {
           }
         }
 
-        div {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          width: 453px;
-          height: 269px;
-          border-radius: 5%;
-          box-shadow: 0 0 20px #00000269;
-        }
         button {
           border: none;
-          width: 453px;
-          height: 280px;
+          max-width: 453px;
+          width: 100%;
+          max-height: 280px;
           border-radius: 3%;
           background: #1f242d;
           box-shadow: 0 0 20px #0000029a;
@@ -327,4 +328,46 @@ main {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #0050ac; /* Цвет ползунка при наведении */
+}
+@media (min-width: 320px) and (max-width: 1200px) {
+  main .content {
+    margin-top: 100px;
+  }
+  main .content .actor {
+    flex-direction: column;
+    align-items: center;
+  }
+  main .content .actor .actor-description {
+    margin-left: 10px;
+  }
+  main .content .filmography h2 {
+    display: flex;
+    justify-content: center;
+  }
+  main .content .filmography .filmography-list {
+    padding-left: 10px;
+    // padding-right: 10px;
+  }
+  main .content .filmography .filmography-list .cart-cinema {
+    flex-direction: column;
+    margin-right: 10px;
+    align-items: center;
+    img {
+      margin-top: 10px;
+      width: 95%;
+    }
+  }
+  main
+    .content
+    .filmography
+    .filmography-list
+    .cart-cinema
+    .descript-similar-content {
+    width: 100%;
+    padding-left: 10px;
+  }
+  main .content .filmography .filmography-list button {
+    width: 97%;
+    height: 35px;
+  }
 }

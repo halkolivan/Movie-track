@@ -8,7 +8,7 @@ import search from "src/assets/images/search.png";
 //Style
 import "src/assets/styles/components/Search.scss";
 
-export default function Search({ films, serials }) {
+export default function Search({ find }) {
   const { t } = useTranslation();
 
   const [query, setQuery] = useState("");
@@ -18,33 +18,21 @@ export default function Search({ films, serials }) {
   };
 
   //   // Фильтрация фильмов
-  const filteredMovies = Array.isArray(films)
-  ? films.filter((movie) =>
-      movie.title && movie.title.toLowerCase().includes(query.toLowerCase())
-    )
-  : [];
+  const filteredMovies = Array.isArray(find)
+    ? find.filter(
+        (movie) =>
+          movie.title && movie.title.toLowerCase().includes(query.toLowerCase())
+      )
+    : [];
+  console.log("Функция поиска по массиву фильмов", filteredMovies);
 
   // Фильтрация сериалов
-  const filteredSerials = Array.isArray(serials)
-  ? serials.filter((serial) =>
-      serial.name && serial.name.toLowerCase().includes(query.toLowerCase())
-    )
-  : [];
-
-  // Объединение данных из всех страниц
-  // const allMovies = films.flat(); // Предположим, что films это массив массивов, нужно преобразовать его в один плоский массив
-  // const allSerials = serials.flat(); // Аналогично для serials
-
-  // Фильтрация фильмов и сериалов
-  // const filteredMovies = allMovies.filter(
-  //   (movie) =>
-  //     movie.title && movie.title.toLowerCase().includes(query.toLowerCase())
-  // );
-
-  // const filteredSerials = allSerials.filter(
-  //   (serial) =>
-  //     serial.name && serial.name.toLowerCase().includes(query.toLowerCase())
-  // );
+  const filteredSerials = Array.isArray(find)
+    ? find.filter(
+        (serial) =>
+          serial.name && serial.name.toLowerCase().includes(query.toLowerCase())
+      )
+    : [];
 
   return (
     <div>
@@ -58,17 +46,9 @@ export default function Search({ films, serials }) {
           onChange={handleSearchChange}
         />
       </div>
+
       {query && (
         <>
-          {/* <div className="results-data">
-            <h2>{t("searchResults")} :</h2>
-            <p>
-              {t("filmsFound")}: {films.length}
-            </p>
-            <p>
-              {t("serialsFound")}: {serials.length}
-            </p>
-          </div> */}
           <div className="results">
             {filteredMovies.length > 0 ? (
               filteredMovies.map((movie) => (
@@ -103,32 +83,30 @@ export default function Search({ films, serials }) {
               <p className="no-results"></p>
             )}
             {filteredSerials.length > 0 ? (
-              filteredSerials.map((serials) => (
-                <div className="films-list" key={serials.id}>
+              filteredSerials.map((serial) => (
+                <div className="films-list" key={serial.id}>
                   <div className="films-list-image">
-                    <div className="rate">
-                      {serials.vote_average.toFixed(1)}
-                    </div>
-                    <NavLink to={`/detailsFilm/${serials.id}`} key={serials.id}>
+                    <div className="rate">{serial.vote_average.toFixed(1)}</div>
+                    <NavLink to={`/detailsFilm/${serial.id}`} key={serial.id}>
                       <img
                         src={
                           "https://image.tmdb.org/t/p/original/" +
-                          serials.poster_path
+                          serial.poster_path
                         }
-                        alt={serials.name}
+                        alt={serial.name}
                       />
                     </NavLink>
                   </div>
                   <div className="films-list-descript">
                     <span className="release-date">
-                      {t("dataRelease")}: {serials.release_date}
+                      {t("dataRelease")}: {serial.release_date}
                     </span>
-                    <div className="title">{serials.name}</div>
-                    <NavLink to={`/detailsFilm/${serials.id}`} key={serials.id}>
+                    <div className="title">{serial.name}</div>
+                    <NavLink to={`/detailsSerial/${serial.id}`} key={serial.id}>
                       {t("moreDetailed")}
                     </NavLink>
                     <p>
-                      {t("voteCount")} : {serials.vote_count}
+                      {t("voteCount")} : {serial.vote_count}
                     </p>
                   </div>
                 </div>
