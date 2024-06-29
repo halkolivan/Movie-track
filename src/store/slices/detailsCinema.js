@@ -84,7 +84,7 @@ export const getCreditsPersonSerial = createAsyncThunk(
       const response = await Request().get(
         `tv/${data.id}/credits?language=${data.language}`
       );
-
+      console.log("tv credits", response);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -92,6 +92,24 @@ export const getCreditsPersonSerial = createAsyncThunk(
     }
   }
 );
+
+// Запрос создателей сериала
+export const getCreatorsPersonSerial = createAsyncThunk(
+  "requestCreatorsPersonSerial/getCreatorsPersonSerial",
+  async (data, { rejectedWithValue }) => {
+    try {
+      const response = await Request().get(
+        `tv/${data.id}/aggregate_credits?language=${data.language}`
+      );
+      
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      return rejectedWithValue(error.response.data);
+    }
+  }
+);
+
 //Похожие кинокартины (фильмы)
 export const getRecommendatFilm = createAsyncThunk(
   "recommendatFilmRequest/getRecommendatFilm",
@@ -132,6 +150,8 @@ const detailFilmsSlice = createSlice({
     resultsTrailerSerial: undefined,
     actors: undefined,
     actorsSerial: undefined,
+    creator: undefined,
+    creatorError: undefined,
     recommendat: undefined,
     recommendatSerial: undefined,
     recommendatError: undefined,
@@ -187,11 +207,18 @@ const detailFilmsSlice = createSlice({
         state.personError = payload;
       })
       .addCase(getCreditsPersonSerial.fulfilled, (state, { payload }) => {
-        state.actorsSerial = payload.cast;
+        state.actorsSerial = payload;
         state.loading = false;
       })
       .addCase(getCreditsPersonSerial.rejected, (state, { payload }) => {
         state.personSerialError = payload;
+      })
+      .addCase(getCreatorsPersonSerial.fulfilled, (state, { payload }) => {
+        state.creator = payload;
+        state.loading = false;
+      })
+      .addCase(getCreatorsPersonSerial.rejected, (state, { payload }) => {
+        state.creatorError = payload;
       })
       .addCase(getRecommendatFilm.fulfilled, (state, { payload }) => {
         state.recommendat = payload;

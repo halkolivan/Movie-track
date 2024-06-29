@@ -15,6 +15,7 @@ import {
   getTrailersDetailSerial,
   getCreditsPersonSerial,
   getRecommendatSerial,
+  getCreatorsPersonSerial,
 } from "../store/slices/detailsCinema";
 
 export default function DetailsFilm() {
@@ -62,6 +63,7 @@ export default function DetailsFilm() {
 
   //Данные фильма
   useEffect(() => {
+    dispatch(getCreatorsPersonSerial({ id: id, language: i18n.language }));
     dispatch(getDetailSerial({ id: id, language: i18n.language }));
     dispatch(getTrailersDetailSerial({ id: id, language: i18n.language }));
     dispatch(getCreditsPersonSerial({ id: id, language: i18n.language }));
@@ -88,16 +90,23 @@ export default function DetailsFilm() {
   const requestPerson = useSelector(
     (state) => state.detailMovie.actorsSerial || []
   );
+  console.log("\x1b[36m\x1b[4m%s\x1b[0m", "ppl serial", requestPerson);
+
+  // Перечень создателей сериала
+  const requestCreatorsSerial = useSelector(
+    (state) => state.detailMovie.creator || []
+  );
+  console.log("запрос на режисёра", requestCreatorsSerial.crew);
 
   //Походие кинокартины
   const requestRecommandat = useSelector(
     (state) => state.detailMovie.recommendatSerial || []
   );
-  console.log(
-    "\x1b[36m\x1b[4m%s\x1b[0m",
-    "recom components",
-    requestRecommandat
-  );
+  // console.log(
+  //   "\x1b[36m\x1b[4m%s\x1b[0m",
+  //   "recom components",
+  //   requestRecommandat
+  // );
 
   //Функция вывода всех значений массива
   function displayFn(el) {
@@ -120,7 +129,7 @@ export default function DetailsFilm() {
                         "https://image.tmdb.org/t/p/original/" +
                         requestDetalSerial.poster_path
                       }
-                      alt={requestDetalSerial.title}
+                      alt={requestDetalSerial.name}
                     />
                   </div>
                   <button className="add-list" onClick={openPopWindow}>
@@ -148,10 +157,10 @@ export default function DetailsFilm() {
                 </div>
                 <div className="content-detail-description">
                   <h1>
-                    {t("title")}: {requestDetalSerial.title}
+                    {t("title")}: {requestDetalSerial.name}
                   </h1>
                   <h2>
-                    {t("originalTitle")}: {requestDetalSerial.original_title}
+                    {t("originalTitle")}: {requestDetalSerial.original_name}
                   </h2>
 
                   <ul>
@@ -175,14 +184,16 @@ export default function DetailsFilm() {
                         {displayFn(requestDetalSerial.spoken_languages)}
                       </span>
                     </li>
-                    {requestPerson.crew && requestPerson.crew.length > 0 ? (
-                      requestPerson.crew.find(
-                        (item) => item.job === "Director"
+                    {requestCreatorsSerial.crew && requestCreatorsSerial.crew.length > 0 ? (
+                      requestCreatorsSerial.crew.find(
+                        (item) => item.known_for_department === "Writing"
                       ) ? (
                         <li>
-                          <span>{t("director")}: </span>
-                          {requestPerson.crew
-                            .filter((item) => item.job === "Director")
+                          <span>{t("creator")}: </span>
+                          {requestCreatorsSerial.crew
+                            .filter(
+                              (item) => item.known_for_department === "Writing"
+                            )
                             .map((director) => (
                               <NavLink
                                 to={`/detailPerson/${director.id}`}
@@ -281,8 +292,8 @@ export default function DetailsFilm() {
           <div className="content-actors">
             <h2>{t("cast")}</h2>
             <div className="content-actors-carts">
-              {requestPerson && requestPerson.length > 0 ? (
-                requestPerson.slice(0, 5).map((item) => (
+              {requestPerson.cast && requestPerson.cast.length > 0 ? (
+                requestPerson.cast.slice(0, 5).map((item) => (
                   <NavLink to={`/detailPerson/${item.id}`} key={item.id}>
                     <img
                       src={
@@ -317,8 +328,8 @@ export default function DetailsFilm() {
                       <button onClick={closeActorWindow}>+</button>
                     </div>
                     <div className="actors-more-count">
-                      {requestPerson && requestPerson.length > 0 ? (
-                        requestPerson.map((item) => (
+                      {requestPerson.cast && requestPerson.cast.length > 0 ? (
+                        requestPerson.cast.map((item) => (
                           <NavLink
                             to={`/detailPerson/${item.id}`}
                             key={item.id}

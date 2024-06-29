@@ -49,5 +49,6 @@
   "trlMss": "Trailers are missing",
   "searchResults": "Search results",
   "filmsFound": "Films found",
-  "serialsFound": "Serials found"
+  "serialsFound": "Serials found",
+  "creator": "Creator(s)"
 }

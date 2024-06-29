@@ -176,7 +176,8 @@ main {
           border: none;
           max-width: 453px;
           width: 100%;
-          max-height: 280px;
+          height: 280px;
+          
           border-radius: 3%;
           background: #1f242d;
           box-shadow: 0 0 20px #0000029a;
@@ -235,6 +236,7 @@ main {
 
           .filmography-list-more-movie {
             display: flex;
+            justify-content: center;
             flex-direction: row;
             flex-wrap: wrap;
             gap: 25px;
@@ -253,11 +255,14 @@ main {
               width: 300px;
               min-height: 543px;
               height: unset;
+              margin-bottom: 30px;
               border-radius: 2%;
               background: #1f242d;
               box-shadow: 0 0 20px #00000269;
               .rank {
                 display: flex;
+                justify-content: center;
+                align-items: center;
                 position: absolute;
                 top: -15px;
                 left: -15px;

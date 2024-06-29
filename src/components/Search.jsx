@@ -1,6 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
+
+import { getSearch } from "../store/slices/home";
 
 //images
 import search from "src/assets/images/search.png";
@@ -8,18 +11,21 @@ import search from "src/assets/images/search.png";
 //Style
 import "src/assets/styles/components/Search.scss";
 
-export default function Search({ find }) {
-  const { t } = useTranslation();
+export default function Search({allCinema}) {
+  const dispatch = useDispatch();
+  const { t, i18n } = useTranslation();
+  const [page, setPage] = useState(1);
 
   const [query, setQuery] = useState("");
 
   const handleSearchChange = (event) => {
     setQuery(event.target.value);
   };
+  
 
-  //   // Фильтрация фильмов
-  const filteredMovies = Array.isArray(find)
-    ? find.filter(
+  // Фильтрация фильмов
+  const filteredMovies = Array.isArray(allCinema)
+    ? allCinema.filter(
         (movie) =>
           movie.title && movie.title.toLowerCase().includes(query.toLowerCase())
       )
@@ -27,8 +33,8 @@ export default function Search({ find }) {
   console.log("Функция поиска по массиву фильмов", filteredMovies);
 
   // Фильтрация сериалов
-  const filteredSerials = Array.isArray(find)
-    ? find.filter(
+  const filteredSerials = Array.isArray(allCinema)
+    ? allCinema.filter(
         (serial) =>
           serial.name && serial.name.toLowerCase().includes(query.toLowerCase())
       )

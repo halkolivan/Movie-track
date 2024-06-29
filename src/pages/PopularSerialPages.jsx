@@ -20,7 +20,6 @@ export default function PopularSerialPages() {
   const [page, setPage] = useState(1);
   const loading = useSelector((state) => state.home.loading);
   const requestPopularSerial = useSelector((state) => state.home.resultsSerial);
-  
 
   //Function for request popular films
   useEffect(() => {
@@ -47,7 +46,7 @@ export default function PopularSerialPages() {
                 <div className="films-list" key={elem}>
                   <div className="films-list-image">
                     <div className="rate">{elem.vote_average.toFixed(1)}</div>
-                    <NavLink to={`/detailsFilm/${elem.id}`} key={elem.id}>
+                    <NavLink to={`/detailsSerial/${elem.id}`} key={elem.id}>
                       <img
                         src={
                           "https://image.tmdb.org/t/p/original/" +
@@ -62,7 +61,7 @@ export default function PopularSerialPages() {
                       {t("dataRelease")}:{elem.first_air_date}
                     </span>
                     <div className="title">{elem.name}</div>
-                    <NavLink to={`/detailsFilm/${elem.id}`} key={elem.id}>
+                    <NavLink to={`/detailsSerial/${elem.id}`} key={elem.id}>
                       {t("moreDetailed")}
                     </NavLink>
                     <p>
