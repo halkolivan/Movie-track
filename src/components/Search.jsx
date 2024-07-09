@@ -61,7 +61,8 @@ export default function Search() {
   };
   const debounceHandleChange = useCallback(
     debounce((inputValue) => {
-      console.log(inputValue, "test");
+      dispatch(getSearch({ page, language: i18n.language, query: inputValue }));
+      // console.log(inputValue, "test");
     }, 500),
     []
   );
