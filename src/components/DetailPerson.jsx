@@ -3,12 +3,24 @@ import { useTranslation } from "react-i18next";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
+//import slices
 import {
   getDetailPerson,
   getExternalPerson,
   getCombinedPerson,
 } from "../store/slices/detailsPerson";
+
+//import selectors
+import {
+  selectDetailActor,
+  selectDetailExternal,
+  selectCombinedCinema,
+} from "../helpers/selectors";
+
 import { getCreditsPerson } from "../store/slices/detailsCinema";
+
+//import images
+import FilmRoll from "src/assets/images/filmRoll.png";
 
 // Styles
 import "src/assets/styles/components/DetailPerson.scss";
@@ -18,12 +30,6 @@ export default function DetailPerson() {
   const { id } = useParams();
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
-  const openPopWindow = () => {
-    setIsOpen(true);
-  };
-  const closePopWindow = () => {
-    setIsOpen(false);
-  };
 
   useEffect(() => {
     dispatch(getDetailPerson({ id: id, language: i18n.language }));
@@ -32,23 +38,10 @@ export default function DetailPerson() {
     dispatch(getCreditsPerson({ id: id, language: i18n.language }));
   }, [id, i18n.language]);
 
-  //Данные Актёра
-  const requestDetailPerson = useSelector(
-    (state) => state.detailsPerson.results
-  );
-
-  // Данные соцсетей
-  const requestExternal = useSelector(
-    (state) => state.detailsPerson.resultsExt
-  );
-  //Фильмы актёра
-  const requestCombined = useSelector(
-    (state) => state.detailsPerson.resultsComb || []
-  );
-  const firstCombidenContent = Array.isArray(requestCombined.cast)
-    ? requestCombined.cast.slice(0, 5)
-    : [];
-  console.log("\x1b[34m\x1b[3m%s\x1b[0m", "Combined", requestCombined);
+  // Использование мемоизированных селекторов
+  const requestDetailPerson = useSelector(selectDetailActor);
+  const requestExternal = useSelector(selectDetailExternal);
+  const requestCombined = useSelector(selectCombinedCinema);
 
   const loading = useSelector((state) => state.detailsPerson.loading);
 
@@ -181,84 +174,131 @@ export default function DetailPerson() {
               <div className="filmography">
                 <h2>{t("filmography")}</h2>
                 <div className="filmography-list">
-                  {firstCombidenContent && firstCombidenContent.length > 0 ? (
-                    firstCombidenContent.map((item, index) => (
-                      <div className="cart-cinema" key={`${item.id}-${index}`}>
-                        <img
-                          src={
-                            "https://image.tmdb.org/t/p/original/" +
-                            item.poster_path
-                          }
-                          alt={item.name}
-                        />
-                        <div className="descript-similar-content">
-                          <span>
-                            {t("dataRelease")}: {item.release_date}
-                          </span>
-                          <span>
-                            {t("title")}: {item.title}
-                          </span>
-                          <NavLink
-                            to={`/detailsFilm/${item.id}`}
-                            key={`${item.id}-${index}`}
-                          >
-                            <span>{t("moreDetailed")}: </span>
-                          </NavLink>
+                  {(requestCombined.cast?.length ||
+                    requestCombined.crew?.length) > 0 ? (
+                    (requestCombined.cast || requestCombined.crew)
+                      .slice(0, 5)
+                      .map((item, index) => (
+                        <div
+                          className="cart-cinema"
+                          key={`${item.id}-${index}`}
+                        >
+                          <img
+                            src={`https://image.tmdb.org/t/p/original/${
+                              item.media_type === "person"
+                                ? item.profile_path
+                                : item.poster_path
+                            }`}
+                            alt={item.title || item.name}
+                          />
+                          <div className="descript-similar-content">
+                            {(item.release_date || item.first_air_date) && (
+                              <span>
+                                {t("dataRelease")}:{" "}
+                                {item.release_date || item.first_air_date}
+                              </span>
+                            )}
+                            <span>
+                              {t("title")}: {item.title || item.name}
+                            </span>
+                            <NavLink
+                              to={
+                                item.media_type === "movie"
+                                  ? `/detailsFilm/${item.id}`
+                                  : item.media_type === "tv"
+                                  ? `/detailsSerial/${item.id}`
+                                  : "#"
+                              }
+                              key={`${item.id}-${index}`}
+                            >
+                              <span>{t("moreDetailed")}: </span>
+                            </NavLink>
+                          </div>
                         </div>
-                      </div>
-                    ))
+                      ))
                   ) : (
-                    <p>{t("loading")}...</p>
+                    <div className="loading">
+                      <img src={FilmRoll} alt="" />
+                      <span>{t("loading")} ...</span>
+                    </div>
                   )}
-
-                  <button onClick={openPopWindow}>{t("more")}</button>
+                  <button
+                    onClick={() => {
+                      setIsOpen(true);
+                    }}
+                  >
+                    {t("more")}
+                  </button>
                   {isOpen && (
                     <section className="filmography-list-more">
                       <div className="filmography-title">
                         <h2>{t("filmography")}</h2>
-                        <button onClick={closePopWindow}>+</button>
+                        <button
+                          onClick={() => {
+                            setIsOpen(false);
+                          }}
+                        >
+                          +
+                        </button>
                       </div>
-
                       <div className="filmography-list-more-movie">
-                        {requestCombined.cast &&
-                        requestCombined.cast.length > 0 ? (
-                          requestCombined.cast.map((item, index) => (
-                            <div
-                              className="cart-movie"
-                              key={`${item.id}-${index}`}
-                            >
-                              <img
-                                src={
-                                  "https://image.tmdb.org/t/p/original/" +
-                                  item.poster_path
-                                }
-                                alt="none image"
-                              />
-                              <div className="rank">
-                                {item.vote_average.toFixed(1)}
-                              </div>
+                        {(requestCombined.cast?.length ||
+                          requestCombined.crew?.length) > 0 ? (
+                          (requestCombined.cast || requestCombined.crew).map(
+                            (item, index) => (
+                              <div
+                                className="cart-movie"
+                                key={`${item.id}-${index}`}
+                              >
+                                <img
+                                  src={`https://image.tmdb.org/t/p/original/${
+                                    item.media_type === "person"
+                                      ? item.profile_path
+                                      : item.poster_path
+                                  }`}
+                                  alt={item.title || item.name}
+                                />
+                                <div className="rank">
+                                  {item?.vote_average?.toFixed(1)}
+                                </div>
 
-                              <div className="description">
-                                <span>
-                                  {t("title")}: {item.title}
-                                </span>
-                                <span>
-                                  {t("dataRelease")}: {item.release_date}
-                                </span>
-                                <span key={`${item.id}-${index}`}>
-                                  {t("role")}: {item.character}
-                                </span>
-                                <NavLink
-                                  to={`/detailsFilm/${item.id}`}
-                                  key={item.id}
-                                >
-                                  <span>{t("moreDetailed")}: </span>
-                                </NavLink>
+                                <div className="description">
+                                  <span>
+                                    {t("title")}: {item.title || item.name}
+                                  </span>
+                                  {(item.release_date ||
+                                    item.first_air_date) && (
+                                    <span>
+                                      {t("dataRelease")}:{" "}
+                                      {item.release_date || item.first_air_date}
+                                    </span>
+                                  )}
+                                  <span key={`${item.id}-${index}`}>
+                                    {t("role")}: {item.character}
+                                  </span>
+                                  <NavLink
+                                    to={
+                                      item.media_type === "movie"
+                                        ? `/detailsFilm/${item.id}`
+                                        : item.media_type === "tv"
+                                        ? `/detailsSerial/${item.id}`
+                                        : "#"
+                                    }
+                                    key={`${item.id}-${index}`}
+                                  >
+                                    <span>{t("moreDetailed")}: </span>
+                                  </NavLink>
+                                </div>
                               </div>
-                            </div>
-                          ))
+                            )
+                          )
                         ) : (
-                          <p> {t("loading")} ... </p>
+                          <p>
+                            <div className="loading">
+                              <img src={FilmRoll} alt="" />
+                              <span>{t("loading")} ...</span>
+                            </div>
+                          </p>
                         )}
                       </div>
                     </section>
@@ -269,7 +309,10 @@ export default function DetailPerson() {
           )}
         </div>
       ) : (
-        <p>{t("loading")} ...</p>
+        <div className="loading">
+          <img src={FilmRoll} alt="" />
+          <span>{t("loading")} ...</span>
+        </div>
       )}
     </main>
   );

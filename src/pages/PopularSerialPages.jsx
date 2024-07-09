@@ -71,13 +71,18 @@ export default function PopularSerialPages() {
                 </div>
               ))
             ) : (
-              <p>запрос отсутствует ...</p>
+              <p>
+                <div className="loading">
+                  <img src={FilmRoll} alt="" />
+                  <span>{t("loading")} ...</span>
+                </div>
+              </p>
             )}
           </div>
         ) : (
           <div className="loading">
             <img src={FilmRoll} alt="" />
-            <span>Загрузка ...</span>
+            <span>{t("loading")} ...</span>
           </div>
         )}
       </div>

@@ -1,15 +1,15 @@
 //Import components
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import Template from "./Template";
 import "./i18n";
+import Template from "./Template";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 //Import pages
 import Home from "./pages/Home";
 import Error from "./pages/Error";
-import WarningLists from "./components/WarningLists";
 import DetailsFilm from "./components/DetailsFilm";
-import DetailsSerial from "./components/DetailsSerial";
 import DetailPerson from "./components/DetailPerson";
+import DetailsSerial from "./components/DetailsSerial";
+import WarningLists from "./components/WarningLists";
 import PopularFilmsPages from "./pages/PopularFilmsPages";
 import PopularSerialPages from "./pages/PopularSerialPages";
 

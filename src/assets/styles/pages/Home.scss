@@ -15,6 +15,18 @@ section {
     max-width: 1400px;
     width: 100%;
     height: unset;
+    h2 {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+
+      color: #fff;
+      font-family: Roboto, sans-serif;
+      // font-size: 21px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+    }
 
     .search {
       display: flex;
@@ -42,6 +54,30 @@ section {
         height: auto;
         display: flex;
         position: absolute;
+      }
+    }
+    button {
+      width: 80px;
+      height: 20px;
+    }
+    .loading {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      position: relative;
+      width: 150px;
+      height: unset;
+      img {
+        width: 50px;
+        height: 50px;
+      }
+      span {
+        color: #fff;
+        font-family: Roboto, sans-serif;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
       }
     }
     .description {
@@ -137,47 +173,9 @@ section {
         width: 100%;
         min-height: 360px;
         gap: 40px;
-        // .loading {
-        //   display: flex;
-        //   flex-direction: row;
-        //   align-items: center;
-        //   position: relative;
-        //   max-width: 1400px;
-        //   width: 100%;
-        //   height: unset;
-        //   justify-content: flex-end;
-        //   a {
-        //     height: 100%;
-        //     color: #fff;
-        //     .films-list-more {
-        //       display: flex;
-        //       justify-content: center;
-        //       align-items: center;
-        //       background: #1f242d;
-        //       width: 155px;
-        //       height: 100%;
-        //       padding: 22px;
-        //       border-radius: 5%;
-        //       box-shadow: 0 0 27px #0000029a;
-        //       cursor: pointer;
-        //     }
-        //   }
-        //   img {
-        //     width: 50px;
-        //     height: 50px;
-        //   }
-        //   span {
-        //     color: #fff;
-        //     font-family: Roboto, sans-serif;
-        //     font-size: 16px;
-        //     font-style: normal;
-        //     font-weight: 400;
-        //     line-height: normal;
-        //   }
-        // }
+
         a {
           display: flex;
-          height: 100%;
           color: #fff;
           .films-list-more {
             display: flex;

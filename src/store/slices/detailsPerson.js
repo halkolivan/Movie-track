@@ -1,7 +1,7 @@
 import Request from "../../helpers/request";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-//Данные Актёра
+//Описание актёра
 export const getDetailPerson = createAsyncThunk(
   "requestDetailPerson/getDetailPerson",
   async (data, { rejectedWithValue }) => {
@@ -17,7 +17,7 @@ export const getDetailPerson = createAsyncThunk(
   }
 );
 
-// Данные соцсетей
+// Данные соцсетей актёра
 export const getExternalPerson = createAsyncThunk(
   "requestExternalPerson/getExternalPerson",
   async (data, { rejectedWithValue }) => {
@@ -30,7 +30,7 @@ export const getExternalPerson = createAsyncThunk(
     }
   }
 );
-
+// Фильмы, сериалы и телешоу актёра
 export const getCombinedPerson = createAsyncThunk(
   "requestCombinedPerson/getCombinedPerson",
   async (data, { rejectedWithValue }) => {
@@ -38,7 +38,6 @@ export const getCombinedPerson = createAsyncThunk(
       const response = await Request().get(
         `person/${data.id}/combined_credits?language=${data.language}`
       );
-      console.log("Combined", response.data);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -46,8 +45,6 @@ export const getCombinedPerson = createAsyncThunk(
     }
   }
 );
-
-
 
 const detailPersonSlice = createSlice({
   name: "detailsPerson",

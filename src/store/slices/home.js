@@ -1,28 +1,6 @@
 import Request from "../../helpers/request";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-// export const getFilmsPopular = createAsyncThunk(
-//   'homeRequest/getFilmsPopular',
-//   async (_, { rejectedWithValue }) => {
-//     try {
-//       const response = await axios.get(
-//         `https://api.themoviedb.org/3/movie/popular?language=ru-RU&page=5`,
-//         {
-//           headers: {
-//             'Content-Type': 'application/json',
-//             Authorization: `Bearer ${
-//               import.meta.env.VITE_APP_API_ACCESS_TOKEN
-//             }`,
-//           },
-//         }
-//       )
-//       return response.data
-//     } catch (error) {
-//       console.log(error)
-//       return rejectedWithValue(error.response.data)
-//     }
-//   }
-// )
 
 // Запрос на популярные фильмы
 export const getFilmsPopular = createAsyncThunk(
@@ -62,9 +40,8 @@ export const getSearch = createAsyncThunk(
   async (data, { rejectedWithValue }) => {
     try {
       const response = await Request().get(
-        `search/collection?include_adult=false&language=${data.language}&page=${data.page}`
+        `search/multi?include_adult=false&language=${data.language}&page=${data.page}&query=${data.query}`
       );
-      console.log("\x1b[35m\x1b[4m%s\x1b[0m", "Поиск из среза", response);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -106,12 +83,11 @@ const homeSlice = createSlice({
         state.serialError = payload;
       })
       .addCase(getSearch.fulfilled, (state, { payload }) => {
-        console.log("Данные поиска из reducer", payload);
-        state.search = payload.results;
+        state.search = payload;
         state.loading = false;
       })
       .addCase(getSearch.rejected, (state, { payload }) => {
-        state.searchError = payload;
+        state.loading = payload;
       });
   },
 });

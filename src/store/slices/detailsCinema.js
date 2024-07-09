@@ -1,6 +1,7 @@
 import Request from "../../helpers/request";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
+// Данные фильма
 export const getDetailFilm = createAsyncThunk(
   "detailFilmRequest/getDetailFilm",
   async (data, { rejectedWithValue }) => {
@@ -15,6 +16,8 @@ export const getDetailFilm = createAsyncThunk(
     }
   }
 );
+
+// Данные сериала
 export const getDetailSerial = createAsyncThunk(
   "detailSerialmRequest/getDetailSerial",
   async (data, { rejectedWithValue }) => {
@@ -61,7 +64,7 @@ export const getTrailersDetailSerial = createAsyncThunk(
     }
   }
 );
-// Запрос актёров фильма
+// Запрос актёров/съёмочной группы кинокартины
 export const getCreditsPerson = createAsyncThunk(
   "requestCreditsPerson/getCreditsPerson",
   async (data, { rejectedWithValue }) => {
@@ -82,9 +85,8 @@ export const getCreditsPersonSerial = createAsyncThunk(
   async (data, { rejectedWithValue }) => {
     try {
       const response = await Request().get(
-        `tv/${data.id}/credits?language=${data.language}`
+        `tv/${data.id}/aggregate_credits?language=${data.language}`
       );
-      console.log("tv credits", response);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -101,7 +103,6 @@ export const getCreatorsPersonSerial = createAsyncThunk(
       const response = await Request().get(
         `tv/${data.id}/aggregate_credits?language=${data.language}`
       );
-      
       return response.data;
     } catch (error) {
       console.log(error);
@@ -131,7 +132,7 @@ export const getRecommendatSerial = createAsyncThunk(
   async (data, { rejectedWithValue }) => {
     try {
       const response = await Request().get(
-        `tv/${data.id}/recommendations?language=${data.language}&page=${data.page}`
+        `tv/${data.id}/similar?language=${data.language}&page=${data.page}`
       );
       return response.data;
     } catch (error) {

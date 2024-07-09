@@ -7,15 +7,24 @@ import { useSelector, useDispatch } from "react-redux";
 //import images
 import FilmRoll from "src/assets/images/filmRoll.png";
 
-// import styles
+//import styles
 import "src/assets/styles/pages/DetailsFilm.scss";
 
+//import Slices
 import {
   getDetailFilm,
   getTrailersDetail,
   getCreditsPerson,
   getRecommendatFilm,
 } from "../store/slices/detailsCinema";
+
+//import selectors
+import {
+  selectDetailFilm,
+  selectTrailersDetailFilm,
+  selectActorsFilm,
+  selectRecommendatFilm,
+} from "../helpers/selectors";
 
 export default function DetailsFilm() {
   const { t, i18n } = useTranslation();
@@ -27,38 +36,6 @@ export default function DetailsFilm() {
   const [isOpenWinActor, setIsOpenWinActor] = useState(false);
   const [trailerKey, setTrailerKey] = useState(null);
   const dispatch = useDispatch();
-
-  const openPopWindow = () => {
-    setIsOpen(true);
-  };
-  const closePopWindow = () => {
-    setIsOpen(false);
-  };
-
-  const openActorWindow = () => {
-    setIsOpenWinActor(true);
-  };
-  const closeActorWindow = () => {
-    setIsOpenWinActor(false);
-  };
-
-  const openSimilarWindow = () => {
-    setIsOpenSimilar(true);
-  };
-  const closeSimilarWindow = () => {
-    setIsOpenSimilar(false);
-  };
-
-  //Модельное окно с видео
-  const openTrailerWindow = (key) => {
-    setTrailerKey(key);
-    setIsOpenTrailer(true);
-  };
-
-  const closeTrailerWindow = () => {
-    setIsOpenTrailer(false);
-    setTrailerKey(null);
-  };
 
   //Данные фильма
   useEffect(() => {
@@ -72,26 +49,11 @@ export default function DetailsFilm() {
     );
   }, [id, i18n.language, page]);
 
-  //Описание фильма
-  const requestDetal = useSelector((state) => state.detailMovie.resultsDfilm);
-
-  //Трейлер фильма
-  const requestTrailersDetail = useSelector(
-    (state) => state.detailMovie.results || []
-  );
-
-  //Перечень актёров
-  const requestPerson = useSelector((state) => state.detailMovie.actors || []);
-  const firstActors = requestPerson.cast ? requestPerson.cast.slice(0, 5) : [];
-  console.log("\x1b[31m\x1b[4m%s\x1b[0m", "Crew", requestPerson.crew);
-
-  //Походие кинокартины
-  const requestRecommandat = useSelector(
-    (state) => state.detailMovie.recommendat || []
-  );
-  const firstRecommendat = requestRecommandat.results
-    ? requestRecommandat.results.slice(0, 5)
-    : [];
+  // Используем мемоизированные селекторы
+  const requestDetal = useSelector(selectDetailFilm);
+  const requestTrailersDetail = useSelector(selectTrailersDetailFilm);
+  const requestPerson = useSelector(selectActorsFilm);
+  const requestRecommandat = useSelector(selectRecommendatFilm);
 
   //Функция вывода всех значений массива
   function displayFn(el) {
@@ -117,7 +79,12 @@ export default function DetailsFilm() {
                       alt={requestDetal.title}
                     />
                   </div>
-                  <button className="add-list" onClick={openPopWindow}>
+                  <button
+                    className="add-list"
+                    onClick={() => {
+                      setIsOpen(true);
+                    }}
+                  >
                     {t("addToList")}
                   </button>
                   {isOpen && (
@@ -128,7 +95,13 @@ export default function DetailsFilm() {
                       <div className="enter-box" tabIndex="0">
                         <div className="enter-box-nav">
                           <span>{t("enter")}</span>
-                          <button onClick={closePopWindow}>+</button>
+                          <button
+                            onClick={() => {
+                              setIsOpen(false);
+                            }}
+                          >
+                            +
+                          </button>
                         </div>
                         <div className="enter-box-social">
                           <button>Google</button>
@@ -167,7 +140,7 @@ export default function DetailsFilm() {
                       <span>{t("lng")}: </span>
                       <span>{displayFn(requestDetal.spoken_languages)}</span>
                     </li>
-                    {requestPerson.crew && requestPerson.crew.length > 0 ? (
+                    {requestPerson.crew ? (
                       requestPerson.crew.find(
                         (item) => item.job === "Director"
                       ) ? (
@@ -232,12 +205,15 @@ export default function DetailsFilm() {
           <div className="content-video-material">
             <h2>{t("videoMaterials")}</h2>
             <div className="content-video-material-box">
-              {requestTrailersDetail && requestTrailersDetail.length > 0 ? (
+              {requestTrailersDetail ? (
                 requestTrailersDetail.map((item) => (
                   <div className="content-video-material-section" key={item.id}>
                     <div
                       className="content-video-material-section-trailer"
-                      onClick={openTrailerWindow}
+                      onClick={() => {
+                        setTrailerKey();
+                        setIsOpenTrailer(true);
+                      }}
                     >
                       <YouTube videoId={item.key} id={item.id} />
                       <h4>
@@ -253,7 +229,14 @@ export default function DetailsFilm() {
                         <div className="trailer" tabIndex="0">
                           <div className="trailer-head">
                             <span>{item.name}</span>
-                            <button onClick={closeTrailerWindow}>+</button>
+                            <button
+                              onClick={() => {
+                                setTrailerKey(null);
+                                setIsOpenTrailer(false);
+                              }}
+                            >
+                              +
+                            </button>
                           </div>
                           <div className="trailer-content">
                             <YouTube videoId={item.key} id={item.id} />
@@ -268,12 +251,11 @@ export default function DetailsFilm() {
               )}
             </div>
           </div>
-
           <div className="content-actors">
             <h2>{t("cast")}</h2>
             <div className="content-actors-carts">
-              {firstActors && firstActors.length > 0 ? (
-                firstActors.map((item) => (
+              {requestPerson.cast && requestPerson.cast.length > 0 ? (
+                requestPerson.cast.slice(0, 5).map((item) => (
                   <NavLink to={`/detailPerson/${item.id}`} key={item.id}>
                     <img
                       src={
@@ -294,7 +276,12 @@ export default function DetailsFilm() {
               ) : (
                 <p>{t("loading")} ...</p>
               )}
-              <div className="full-list" onClick={openActorWindow}>
+              <div
+                className="full-list"
+                onClick={() => {
+                  setIsOpenWinActor(true);
+                }}
+              >
                 {t("more")}
               </div>
               {isOpenWinActor && (
@@ -305,7 +292,13 @@ export default function DetailsFilm() {
                   <div className="actors-box">
                     <div className="actors-box-title">
                       <span>{t("actors")}</span>
-                      <button onClick={closeActorWindow}>+</button>
+                      <button
+                        onClick={() => {
+                          setIsOpenWinActor(false);
+                        }}
+                      >
+                        +
+                      </button>
                     </div>
                     <div className="actors-more-count">
                       {requestPerson.cast && requestPerson.cast.length > 0 ? (
@@ -342,8 +335,9 @@ export default function DetailsFilm() {
           <div className="content-similar">
             <h2>{t("similarFilms")}</h2>
             <div className="content-similar-carts">
-              {firstRecommendat && firstRecommendat.length > 0 ? (
-                firstRecommendat.map((item) => (
+              {requestRecommandat.results &&
+              requestRecommandat.results.length > 0 ? (
+                requestRecommandat.results.slice(0, 5).map((item) => (
                   <NavLink to={`/detailsFilm/${item.id}`} key={item.id}>
                     <img
                       src={
@@ -372,7 +366,9 @@ export default function DetailsFilm() {
               )}
               <button
                 className="similar-films"
-                onClick={openSimilarWindow}
+                onClick={() => {
+                  setIsOpenSimilar(true);
+                }}
                 style={{ zIndex: isOpenTrailer ? 0 : 1 }}
               >
                 <span>{t("more")}</span>
@@ -385,7 +381,13 @@ export default function DetailsFilm() {
                   <div className="similar-box">
                     <div className="similar-box-title">
                       <h2>{t("similarFilms")}</h2>
-                      <button onClick={closeSimilarWindow}>+</button>
+                      <button
+                        onClick={() => {
+                          setIsOpenSimilar(false);
+                        }}
+                      >
+                        +
+                      </button>
                     </div>
                     <div className="similar-box-movies">
                       {requestRecommandat.results &&
@@ -416,7 +418,13 @@ export default function DetailsFilm() {
                           </NavLink>
                         ))
                       ) : (
-                        <p> {t("loading")} ... </p>
+                        <p>
+                          {" "}
+                          <div className="loading">
+                            <img src={FilmRoll} alt="" />
+                            <span>{t("loading")} ...</span>
+                          </div>{" "}
+                        </p>
                       )}
                     </div>
                   </div>

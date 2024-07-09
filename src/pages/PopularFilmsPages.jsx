@@ -12,6 +12,8 @@ import FilmRoll from "src/assets/images/filmRoll.png";
 import "src/assets/styles/pages/CinemaPages.scss";
 
 export default function PopularFilmsPages() {
+
+  
   //Initialization variables
   const dispatch = useDispatch();
   const { t, i18n } = useTranslation();

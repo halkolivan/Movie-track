@@ -3,11 +3,7 @@ import { NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import {
-  getFilmsPopular,
-  getPopularSerial,
-  getSearch,
-} from "../store/slices/home";
+import { getFilmsPopular, getPopularSerial } from "../store/slices/home";
 
 // import styles
 import "src/assets/styles/pages/Home.scss";
@@ -18,29 +14,18 @@ import FilmRoll from "src/assets/images/filmRoll.png";
 //Components
 import Search from "src/components/Search.jsx";
 
-//images
-// import search from "src/assets/images/search.png";
-
 export default function Home() {
   const { t, i18n } = useTranslation();
   const [page, setPage] = useState(1);
 
   const dispatch = useDispatch();
 
-  const getPopularFilms = useSelector((state) => state.home.results || []);
-  const getSerialPopular = useSelector(
-    (state) => state.home.resultsSerial || []
-  );
+  const getPopularFilms = useSelector((state) => state.home.results);
+  const getSerialPopular = useSelector((state) => state.home.resultsSerial);
 
-  const sumCinema = [...getPopularFilms, ...getSerialPopular]
-  console.log('sum cinema',sumCinema)
-  
-  const responseSearch = useSelector((state) => state.home.search);
-  console.log("responseSearch", responseSearch);
   // const loading = useSelector((state) => state.home.loading);
 
   useEffect(() => {
-    dispatch(getSearch({ page, language: i18n.language }));
     dispatch(getFilmsPopular({ page, language: i18n.language }));
     dispatch(getPopularSerial({ page, language: i18n.language }));
   }, [page, i18n.language]);
@@ -67,7 +52,7 @@ export default function Home() {
           <h3>{t("searchFilms")}</h3>
         </div>
 
-        <Search allCinema={sumCinema}/>
+        <Search />
 
         <div className="popular">
           <h2>{t("popularFilms")}</h2>

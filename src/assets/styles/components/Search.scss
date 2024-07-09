@@ -2,10 +2,10 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: center;
   gap: 20px;
   padding-left: 20px;
-  margin-top: 50px;
+  margin-top: 10px;
   padding-top: 25px;
   padding-bottom: 25px;
   width: 100%;
@@ -26,7 +26,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-            width: 50px;
+      width: 50px;
       height: 50px;
       margin-top: -35px;
       margin-left: -35px;
@@ -51,6 +51,7 @@
       display: flex;
       flex-direction: column;
       justify-content: space-around;
+      border-top: 1px solid #fff;
       margin-top: 10px;
       overflow: hidden;
       min-height: 100px;
@@ -109,4 +110,65 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+}
+.page-numbers {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 1400px;
+  height: 60px;
+  right: 10px;
+  gap: 50px;
+  border-radius: 3px;
+  box-shadow: 0 0 27px #0000029a;
+  margin-bottom: 20px;
+  ul {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-left: 0px;
+    gap: 30px;
+    list-style: none;
+    font-size: 13px;
+    font-family: Roboto, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    .selected {
+      padding: 4px;
+      border-radius: 12px;
+      border: 1px solid #9ca8b1;
+      color: #9ca8b1;
+    }
+    .previous:hover {
+      color: #9ca8b1;
+    }
+    li {
+      cursor: pointer;
+    }
+    li:hover {
+      color: #9ca8b1;
+    }
+  }
+  button {
+    width: 80px;
+    height: 20px;
+    cursor: pointer;
+  }
+}
+@media (min-width: 320px) and (max-width: 1400px) {
+  .results {
+    justify-content: flex-start;
+  }
+  .results .page-numbers {
+    min-width: 310px;
+    width: 100%;
+    padding-left: 5px;
+    padding-right: 5px;
+    ul {
+      gap: 10px;
+    }
+  }
 }

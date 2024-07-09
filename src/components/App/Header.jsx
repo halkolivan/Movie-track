@@ -3,26 +3,15 @@ import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
 
-// Import images
-
 //Import styles
 import "src/assets/styles/app/header.scss";
 
-// Функция для придания Header свойства position: sticky
 export default function Header() {
-  
   const { t, i18n } = useTranslation();
   const changeLanguage = (language) => {
     i18n.changeLanguage(language);
   };
-
   const [isOpen, setIsOpen] = useState(false);
-  const openPopWindow = () => {
-    setIsOpen(true);
-  };
-  const closePopWindow = () => {
-    setIsOpen(false);
-  };
 
   return (
     <header>
@@ -38,27 +27,41 @@ export default function Header() {
         </div>
 
         <div className="right-side">
-          <span>{t("search")}</span>
+          <NavLink to="/">
+            <span>{t("search")}</span>
+          </NavLink>
           <NavLink to="/warningLists">
             <span>{t("myLists")}</span>
           </NavLink>
-          <button onClick={openPopWindow}>{t("enter")}</button>
+          <button
+            onClick={() => {
+              setIsOpen(true);
+            }}
+          >
+            {t("enter")}
+          </button>
           {isOpen && (
-          <div className="overlay">
-            <div className="enter-box" tabIndex="0">
-              <div className="enter-box-nav">
-                <span>{t("enter")}</span>
-                <button onClick={closePopWindow}>+</button>
-              </div>
-              <div className="enter-box-social">
-                <button>Google</button>
-                <button>Yandex</button>
-                <button>Vkontakte</button>
-                <button>GitHub</button>
+            <div className="overlay">
+              <div className="enter-box" tabIndex="0">
+                <div className="enter-box-nav">
+                  <span>{t("enter")}</span>
+                  <button
+                    onClick={() => {
+                      setIsOpen(false);
+                    }}
+                  >
+                    +
+                  </button>
+                </div>
+                <div className="enter-box-social">
+                  <button>Google</button>
+                  <button>Yandex</button>
+                  <button>Vkontakte</button>
+                  <button>GitHub</button>
+                </div>
               </div>
             </div>
-          </div>
-        )}
+          )}
         </div>
       </div>
     </header>

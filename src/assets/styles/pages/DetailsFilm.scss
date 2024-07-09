@@ -294,9 +294,8 @@ main {
           li:nth-of-type(5) {
             display: flex;
             flex-direction: row;
-              flex-wrap: wrap;
+            flex-wrap: wrap;
             gap: 10px;
-            
           }
         }
       }
@@ -512,6 +511,7 @@ main {
           align-items: center;
           justify-content: center;
           width: 454px;
+          height: 212px;
           text-decoration: none;
           box-shadow: 0 0 15px #12151a;
           border-radius: 2%;
@@ -617,7 +617,7 @@ main {
         gap: 10px;
         max-width: 1400px;
         width: 100%;
-        min-height: 539px;
+        height: 270px;
         height: unset;
         a {
           display: flex;
@@ -668,7 +668,7 @@ main {
           justify-content: center;
           align-items: center;
           width: 454px;
-          max-height: 270px;
+          height: 270px;
           border-radius: 2%;
           background: #1f242d;
           box-shadow: 0 0 20px #12151a;
@@ -810,53 +810,49 @@ main {
 
   main .content-general .content-actors .content-actors-carts {
     justify-content: center;
+    .full-list {
+      height: 40px;
+    }
   }
 
   main .content-general .content-actors {
     align-items: center;
     justify-content: center;
   }
+
   main .content-general .content-detail .content-detail-description {
     padding-left: 15px;
   }
+
   main .content-general .content-description {
     padding-left: 10px;
+    h2 {
+      display: flex;
+      justify-content: center;
+    }
   }
+
   main .content-general .content-video-material {
     padding-left: 10px;
+    h2 {
+      display: flex;
+      justify-content: center;
+    }
   }
+
   main .content-general .content-video-material-box {
     flex-direction: column;
     overflow-x: hidden;
   }
-  main .content-general .content-similar .content-similar-carts .similar-films {
-    max-width: 420px;
-  }
-  main
-    .content-general
-    .content-similar
-    .content-similar-carts
-    .overlay
-    .similar-box {
+
+  main .content-general .content-similar .overlay .similar-box {
     height: 95%;
   }
-  main
-    .content-general
-    .content-similar
-    .content-similar-carts
-    .overlay
-    .similar-box
-    .similar-box-movies {
+  main .content-general .overlay .similar-box .similar-box-movies {
     margin-bottom: 50px;
     justify-content: center;
   }
-  main .content-general .content-similar {
-    align-items: center;
-  }
-  main .content-general .content-similar .content-similar-carts {
-    justify-content: center;
-  }
-  main .content-general .content-similar .content-similar-carts a {
-    width: 420px;
+  main .content-general .content-similar .content-similar-carts .similar-films {
+    height: 50px;
   }
 }
