@@ -1,6 +1,7 @@
 import debounce from "lodash.debounce";
 import { NavLink } from "react-router-dom";
 import ReactPaginate from "react-paginate";
+import reactSelect from "react-select";
 import { useTranslation } from "react-i18next";
 import { useState, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -98,7 +99,7 @@ export default function Search() {
                             movie.media_type === "movie"
                               ? `/detailsFilm/${movie.id}`
                               : movie.media_type === "tv"
-                              ? `/detailsSeries/${movie.id}`
+                              ? `/detailsSerial/${movie.id}`
                               : movie.media_type === "person"
                               ? `/detailPerson/${movie.id}`
                               : "#"
@@ -129,7 +130,7 @@ export default function Search() {
                             movie.media_type === "movie"
                               ? `/detailsFilm/${movie.id}`
                               : movie.media_type === "tv"
-                              ? `/detailsSeries/${movie.id}`
+                              ? `/detailsSerial/${movie.id}`
                               : movie.media_type === "person"
                               ? `/detailPerson/${movie.id}`
                               : "#"
