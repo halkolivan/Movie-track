@@ -32,6 +32,8 @@ section {
       display: flex;
       position: relative;
       align-items: center;
+      justify-content: flex-end;
+      gap: 5px;
 
       .blinking-cursor {
         color: #fff;
@@ -39,7 +41,7 @@ section {
       input {
         padding-left: 55px;
         padding-right: 10px;
-        border-radius: 50px;
+        border-radius: 50px 0px 0px 50px;
         border: 1px solid #b1b1b1;
         max-width: 1395px;
         width: 100%;
@@ -54,6 +56,38 @@ section {
         height: auto;
         display: flex;
         position: absolute;
+      }
+      // .custom_container {
+      //   position: relative;
+      //   padding-right: 10px;
+      // }
+      .custom__control {
+        position: relative;
+        max-width: 200px;
+        width: 100%;
+        min-height: 45px;
+        height: 45px;
+        background: none;
+        border-radius: 0px 50px 50px 0px;
+
+        font-family: Roboto, sans-serif;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+      }
+      .custom__value-container {
+        // top: 5px;
+        // padding: 8px;
+        font-size: 10px;
+        height: 45px;
+      }
+      .custom__input {
+        margin: 0px;
+        height: 45px;
+      }
+      .custom__indicators {
+        height: 40px;
       }
     }
     button {

@@ -50,6 +50,7 @@ export default function Home() {
             </li>
           </ul>
           <h3>{t("searchFilms")}</h3>
+          
         </div>
 
         <Search />

@@ -1,7 +1,7 @@
 import debounce from "lodash.debounce";
+import Select from "react-select";
 import { NavLink } from "react-router-dom";
 import ReactPaginate from "react-paginate";
-import reactSelect from "react-select";
 import { useTranslation } from "react-i18next";
 import { useState, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,15 +19,23 @@ import "src/assets/styles/components/Search.scss";
 export default function Search() {
   const dispatch = useDispatch();
   const { t, i18n } = useTranslation();
+  const [selectCategory, setSelectCategory] = useState(null);
   const [query, setQuery] = useState("");
   const [page, setPage] = useState(1);
   const [pageRangeDisplayed, setPageRangeDisplayed] = useState(5);
-
   const loading = useSelector((state) => state.home.loading);
   const responseSearch = useSelector((state) => state.home.search);
+
   useEffect(() => {
-    dispatch(getSearch({ page, language: i18n.language, query: query }));
-  }, [query, page]);
+    dispatch(
+      getSearch({
+        page,
+        language: i18n.language,
+        query: query,
+        category: selectCategory?.value,
+      })
+    );
+  }, [query, page, selectCategory]);
 
   const resultsSearch = responseSearch.total_results;
   const totalPages = responseSearch.total_pages;
@@ -62,11 +70,36 @@ export default function Search() {
   };
   const debounceHandleChange = useCallback(
     debounce((inputValue) => {
-      dispatch(getSearch({ page, language: i18n.language, query: inputValue }));
+      dispatch(
+        getSearch({
+          page,
+          language: i18n.language,
+          query: inputValue,
+          category: selectCategory?.value,
+        })
+      );
       // console.log(inputValue, "test");
     }, 500),
-    []
+    [selectCategory]
   );
+
+  // Получение уникальных типов медиа
+  const uniqueMediaTypes = Array.from(
+    new Set(responseSearch.results?.map((el) => el.media_type))
+  ).map((type) => ({
+    value: type,
+    label: type.charAt(0).toUpperCase() + type.slice(1),
+  }));
+
+  const filteredResults = selectCategory
+    ? responseSearch.results.filter(
+        (el) => el.media_type === selectCategory.value
+      )
+    : responseSearch.results;
+
+  const handleCategoryChange = (selectedOption) => {
+    setSelectCategory(selectedOption);
+  };
 
   return (
     <div>
@@ -79,6 +112,14 @@ export default function Search() {
           value={query}
           onChange={handleChangeClick}
         />
+        <Select
+          value={selectCategory}
+          onChange={handleCategoryChange}
+          options={uniqueMediaTypes}
+          classNamePrefix="custom"
+          placeholder="Select category"
+          isClearable
+        />
       </div>
       {!loading ? (
         <>
@@ -86,8 +127,8 @@ export default function Search() {
             <>
               <h2>Результаты поиска: {resultsSearch}</h2>
               <div className="results">
-                {responseSearch.results && responseSearch.results.length > 0 ? (
-                  responseSearch.results.map((movie) => (
+                {filteredResults && filteredResults.length > 0 ? (
+                  filteredResults.map((movie) => (
                     <div className="films-list" key={movie.id}>
                       <div className="films-list-image">
                         <div className="rate">
