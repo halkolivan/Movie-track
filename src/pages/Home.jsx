@@ -1,6 +1,6 @@
-import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
 
 import { getFilmsPopular, getPopularSerial } from "../store/slices/home";
@@ -23,8 +23,7 @@ export default function Home() {
   const getPopularFilms = useSelector((state) => state.home.results);
   const getSerialPopular = useSelector((state) => state.home.resultsSerial);
 
-  // const loading = useSelector((state) => state.home.loading);
-
+  
   useEffect(() => {
     dispatch(getFilmsPopular({ page, language: i18n.language }));
     dispatch(getPopularSerial({ page, language: i18n.language }));

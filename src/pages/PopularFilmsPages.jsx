@@ -2,7 +2,7 @@ import ReactPaginate from "react-paginate";
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { getFilmsPopular, setLoading } from "../store/slices/home";
+import { getFilmsPopular, setLoading } from "src/store/slices/home";
 import { useSelector, useDispatch } from "react-redux";
 
 //import images
@@ -12,12 +12,11 @@ import FilmRoll from "src/assets/images/filmRoll.png";
 import "src/assets/styles/pages/CinemaPages.scss";
 
 export default function PopularFilmsPages() {
-
-  
   //Initialization variables
   const dispatch = useDispatch();
   const { t, i18n } = useTranslation();
 
+  // Диапазон отображаемых страниц
   const [pageRangeDisplayed, setPageRangeDisplayed] = useState(5);
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 480px)");
@@ -38,23 +37,13 @@ export default function PopularFilmsPages() {
     };
   }, []);
   useEffect(() => {
-    console.log('pageRangeDisplayed updated:', pageRangeDisplayed);
+    console.log("pageRangeDisplayed updated:", pageRangeDisplayed);
   }, [pageRangeDisplayed]);
 
   //Initialization state manager
   const [page, setPage] = useState(1);
   const loading = useSelector((state) => state.home.loading);
   const requestPopularFilms = useSelector((state) => state.home.results);
-
-  if (requestPopularFilms && requestPopularFilms.length > 0) {
-    console.log("films", requestPopularFilms);
-  } else {
-    console.log("Массив не найден");
-  }
-
-  if (page >= 1) {
-    console.log("page films", page);
-  }
 
   //Function for request popular films
   useEffect(() => {
@@ -88,7 +77,7 @@ export default function PopularFilmsPages() {
                           "https://image.tmdb.org/t/p/original/" +
                           item.poster_path
                         }
-                        alt=""
+                        alt="none image"
                       />
                     </NavLink>
                   </div>

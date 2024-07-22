@@ -57,13 +57,10 @@ section {
         display: flex;
         position: absolute;
       }
-      // .custom_container {
-      //   position: relative;
-      //   padding-right: 10px;
-      // }
+
       .custom__control {
         position: relative;
-        max-width: 200px;
+        max-width: 220px;
         width: 100%;
         min-height: 45px;
         height: 45px;
@@ -77,10 +74,11 @@ section {
         line-height: normal;
       }
       .custom__value-container {
-        // top: 5px;
-        // padding: 8px;
         font-size: 10px;
         height: 45px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
       }
       .custom__single-value {
         font-size: 16px;
