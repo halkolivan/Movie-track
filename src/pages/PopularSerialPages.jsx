@@ -21,6 +21,32 @@ export default function PopularSerialPages() {
   const loading = useSelector((state) => state.home.loading);
   const requestPopularSerial = useSelector((state) => state.home.resultsSerial);
 
+  // Диапазон отображаемых страниц
+  const [pageRangeDisplayed, setPageRangeDisplayed] = useState(5);
+
+  // Использование эффекта для отслеживания изменения ширины экрана
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 480px)");
+
+    const handleMediaQueryChange = (e) => {
+      if (e.matches) {
+        setPageRangeDisplayed(1);
+      } else {
+        setPageRangeDisplayed(5);
+      }
+    };
+
+    handleMediaQueryChange(mediaQuery); // Устанавливаем начальное значение
+    mediaQuery.addEventListener("change", handleMediaQueryChange); // Слушатель изменения
+
+    return () => {
+      mediaQuery.removeEventListener("change", handleMediaQueryChange); // Удаление слушателя
+    };
+  }, []);
+  useEffect(() => {
+    console.log("pageRangeDisplayed updated:", pageRangeDisplayed);
+  }, [pageRangeDisplayed]);
+
   //Function for request popular films
   useEffect(() => {
     dispatch(
@@ -90,7 +116,7 @@ export default function PopularSerialPages() {
         <ReactPaginate
           breakLabel="..."
           onPageChange={handleClick}
-          pageRangeDisplayed={5}
+          pageRangeDisplayed={pageRangeDisplayed}
           pageCount={500}
           nextLabel="next >"
           previousLabel="< previous"
