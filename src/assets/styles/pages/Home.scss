@@ -1,3 +1,5 @@
+@import "swiper/scss";
+
 a {
   text-decoration: none;
 }
@@ -153,6 +155,112 @@ section {
       font-style: normal;
       font-weight: 400;
       line-height: normal;
+      .top-f {
+        display: flex;
+        flex-direction: column;
+        p {
+          display: flex;
+          justify-content: center;
+        }
+        .swiper {
+          position: absolute;
+          margin-top: 50px;
+          box-shadow: 0 0 27px #0000029a;
+          max-width: 1390px;
+          width: 100%;
+          max-height: 230px;
+          height: 100%;
+          .top-box {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            height: 100%;
+            width: 100%;
+            margin-top: 10px;
+            margin-left: 10px;
+
+            h4 {
+              font-size: 13px;
+              margin-left: 10px;
+              margin-top: 5px;
+            }
+            h4:nth-of-type(3) {
+              color: #9b9b9b;
+            }
+            h4:nth-of-type(4) {
+              color: #ecea73;
+            }
+            h4:nth-of-type(2) {
+              color: #2ec235;
+            }
+            img {
+              width: 160px;
+            }
+            img:hover {
+              opacity: 0.5;
+            }
+          }
+        }
+        .swiper:nth-of-type(2) {
+          margin-top: 300px;
+        }
+      }
+      .top-s {
+        display: flex;
+        flex-direction: column;
+        margin-top: 270px;
+        p {
+          display: flex;
+          justify-content: center;
+        }
+        .swiper {
+          position: absolute;
+          margin-top: 50px;
+          box-shadow: 0 0 27px #0000029a;
+          max-width: 1390px;
+          width: 100%;
+          max-height: 230px;
+          height: 100%;
+          .top-box {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            height: 100%;
+            width: 100%;
+            margin-top: 10px;
+            margin-left: 10px;
+
+            h4 {
+              font-size: 13px;
+              margin-left: 10px;
+              margin-top: 5px;
+            }
+            h4:nth-of-type(3) {
+              color: #9b9b9b;
+            }
+            h4:nth-of-type(4) {
+              color: #ecea73;
+            }
+            h4:nth-of-type(2) {
+              color: #2ec235;
+            }
+            img {
+              width: 160px;
+            }
+            img:hover {
+              opacity: 0.5;
+            }
+          }
+        }
+        .swiper:nth-of-type(2) {
+          margin-top: 300px;
+        }
+      }
+      h1 {
+        display: flex;
+        justify-content: center;
+        margin-top: 300px;
+      }
 
       h3 {
         margin-top: 20px;

@@ -1,7 +1,6 @@
 import Request from "../../helpers/request";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-
 // Запрос на популярные фильмы
 export const getFilmsPopular = createAsyncThunk(
   "homeRequest/getFilmsPopular",
@@ -50,6 +49,40 @@ export const getSearch = createAsyncThunk(
   }
 );
 
+//Топ фильмы
+export const getTopFilms = createAsyncThunk(
+  "homeRequestTop/getTopFilms",
+  async (data, { rejectedWithValue }) => {
+    try {
+      const response = await Request().get(
+        `movie/top_rated?language=${data.language}&page=${data.page}`
+      );
+      console.log("Топ фильмов", response);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      return rejectedWithValue(error.responses.data);
+    }
+  }
+);
+
+//Топ Сериалы
+export const getTopSerials = createAsyncThunk(
+  "homeRequestTopSerials/getTopSerials",
+  async (data, { rejectedWithValue }) => {
+    try {
+      const response = await Request().get(
+        `tv/top_rated?language=${data.language}&page=${data.page}`
+      );
+      console.log("Топ сериалы", response);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      return rejectedWithValue(error.responses.data);
+    }
+  }
+);
+
 const homeSlice = createSlice({
   name: "home",
   initialState: {
@@ -58,6 +91,10 @@ const homeSlice = createSlice({
     search: [],
     searchError: null,
     resultsSerial: undefined,
+    resultsTopF: undefined,
+    resultsTopS: undefined,
+    topError: undefined,
+    topSerialError: undefined,
     serialError: undefined,
     popularError: undefined,
   },
@@ -87,7 +124,21 @@ const homeSlice = createSlice({
         state.loading = false;
       })
       .addCase(getSearch.rejected, (state, { payload }) => {
-        state.loading = payload;
+        state.searchError = payload;
+      })
+      .addCase(getTopFilms.fulfilled, (state, { payload }) => {
+        state.resultsTopF = payload;
+        state.loading = false;
+      })
+      .addCase(getTopFilms.rejected, (state, { payload }) => {
+        state.topError = payload;
+      })
+      .addCase(getTopSerials.fulfilled, (state, { payload }) => {
+        state.resultsTopS = payload;
+        state.loading = false;
+      })
+      .addCase(getTopSerials.rejected, (state, { payload }) => {
+        state.topSerialError = payload;
       });
   },
 });

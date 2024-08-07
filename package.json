@@ -28,7 +28,8 @@
     "react-select": "^5.8.0",
     "react-youtube": "^10.1.0",
     "reselect": "^5.1.1",
-    "sass": "^1.69.5"
+    "sass": "^1.69.5",
+    "swiper": "^11.1.9"
   },
   "devDependencies": {
     "@types/react": "^18.2.43",

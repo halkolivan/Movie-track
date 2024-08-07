@@ -8,6 +8,7 @@ export default defineConfig({
     alias: {
       src: "/src",
       public: "/public",
+      
     },
   },
   server: {
