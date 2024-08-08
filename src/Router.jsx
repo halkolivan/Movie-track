@@ -12,6 +12,7 @@ import DetailsSerial from "./components/DetailsSerial";
 import WarningLists from "./components/WarningLists";
 import PopularFilmsPages from "./pages/PopularFilmsPages";
 import PopularSerialPages from "./pages/PopularSerialPages";
+import Changes from "./pages/Changes"
 
 export default function Router() {
   const routing = createBrowserRouter([
@@ -49,6 +50,10 @@ export default function Router() {
         {
           path: "/popularSerialPages",
           element: <PopularSerialPages />,
+        },
+        {
+          path: "/changes",
+          element: <Changes />,
         },
         {
           path: "*",

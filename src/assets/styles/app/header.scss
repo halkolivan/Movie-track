@@ -13,6 +13,7 @@ header {
   min-height: 63px;
   height: unset;
   width: 100%;
+
   z-index: 100;
   background: #282f43;
   .components-menu {
@@ -168,6 +169,7 @@ header {
     .left-side {
       display: flex;
       flex-direction: row;
+      align-items: center;
       gap: 20px;
       a span {
         color: #fff;
@@ -179,6 +181,14 @@ header {
       }
       a span:hover {
         color: #0073fa;
+      }
+      a:nth-of-type(2) {
+        margin-left: 20px;
+        color: #fff;
+        font-family: Cantarell, sans-serif;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 400;
       }
     }
     .languages {

@@ -10,7 +10,7 @@
   "telegramForum": "Телеграм для общения и обсуждения фильмов",
   "searchFilms": "Найти фильм, сериал, персону...",
   "popularFilms": "Популярные фильмы",
-  "topFilms":"Топ фильмы",
+  "topFilms": "Топ фильмы",
   "topSerials": "Топ сериалы",
   "popularSerial": "Популярные Сериалы",
   "similarFilms": "Похожие фильмы",
@@ -30,7 +30,7 @@
   "lng": "Язык",
   "director": "Режиссёр",
   "movieCompany": "Кинокомпании",
-  "genre" : "Жанр",
+  "genre": "Жанр",
   "budget": "Бюджет",
   "revenue": "Сборы",
   "releaseDate": "Дата выхода",
@@ -52,5 +52,6 @@
   "searchResults": "Результаты поиска",
   "filmsFound": "Найдено фильмов",
   "serialsFound": "Найдено сериалов",
-  "creator": "Создатель(и)"
+  "creator": "Создатель(и)",
+  "changes": "Изменения"
 }

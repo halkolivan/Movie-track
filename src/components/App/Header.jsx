@@ -6,6 +6,7 @@ import { useState } from "react";
 //Import styles
 import "src/assets/styles/app/header.scss";
 
+
 export default function Header() {
   const { t, i18n } = useTranslation();
   const changeLanguage = (language) => {
@@ -24,6 +25,7 @@ export default function Header() {
             <span onClick={() => changeLanguage("ru")}>Ru</span>
             <span onClick={() => changeLanguage("en")}>En</span>
           </div>
+          <NavLink to="/changes">{t('changes')}</NavLink>
         </div>
 
         <div className="right-side">
