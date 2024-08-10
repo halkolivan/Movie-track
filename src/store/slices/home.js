@@ -9,6 +9,7 @@ export const getFilmsPopular = createAsyncThunk(
       const response = await Request().get(
         `movie/popular?language=${data.language}&page=${data.page}`
       );
+      window.scrollTo({ top: 0, behavior: "auto" });
       return response.data;
     } catch (error) {
       console.log(error);
@@ -25,6 +26,7 @@ export const getPopularSerial = createAsyncThunk(
       const response = await Request().get(
         `tv/popular?language=${data.language}&page=${data.page}`
       );
+      window.scrollTo({ top: 0, behavior: "auto" });
       return response.data;
     } catch (error) {
       console.log(error);
@@ -41,6 +43,7 @@ export const getSearch = createAsyncThunk(
       const response = await Request().get(
         `search/multi?include_adult=false&language=${data.language}&page=${data.page}&query=${data.query}`
       );
+      window.scrollTo({ top: 0, behavior: "auto" });
       return response.data;
     } catch (error) {
       console.log(error);
@@ -57,7 +60,7 @@ export const getTopFilms = createAsyncThunk(
       const response = await Request().get(
         `movie/top_rated?language=${data.language}&page=${data.page}`
       );
-      console.log("Топ фильмов", response);
+      
       return response.data;
     } catch (error) {
       console.log(error);
@@ -74,7 +77,7 @@ export const getTopSerials = createAsyncThunk(
       const response = await Request().get(
         `tv/top_rated?language=${data.language}&page=${data.page}`
       );
-      console.log("Топ сериалы", response);
+      
       return response.data;
     } catch (error) {
       console.log(error);

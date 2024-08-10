@@ -18,7 +18,7 @@ export default function PopularFilmsPages() {
 
   // Диапазон отображаемых страниц
   const [pageRangeDisplayed, setPageRangeDisplayed] = useState(5);
-  
+
   // Использование эффекта для отслеживания изменения ширины экрана
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 480px)");
@@ -46,6 +46,8 @@ export default function PopularFilmsPages() {
   const [page, setPage] = useState(1);
   const loading = useSelector((state) => state.home.loading);
   const requestPopularFilms = useSelector((state) => state.home.results);
+
+  
 
   //Function for request popular films
   useEffect(() => {

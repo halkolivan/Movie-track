@@ -71,9 +71,6 @@ export default function Home() {
         mql.removeEventListener("change", handleMedia)
       );
     };
-    // handleMedia(width480);
-    // width480.addEventListener("change", handleMedia);
-    // return () => width480.removeEventListener("change", handleMedia);
   }, []);
   useEffect(() => {
     console.log("pageRangeDisplay updated:", pageRangeDisplay);
@@ -152,13 +149,13 @@ export default function Home() {
                   <SwiperSlide>
                     <div className="top-box" key={topF.id}>
                       <NavLink to={`/detailsSerial/${topF.id}`} key={topF.id}>
-                      <img
-                        src={
-                          "https://image.tmdb.org/t/p/original/" +
-                          topF.backdrop_path
-                        }
-                        alt={topF.name}
-                      />
+                        <img
+                          src={
+                            "https://image.tmdb.org/t/p/original/" +
+                            topF.backdrop_path
+                          }
+                          alt={topF.name}
+                        />
                       </NavLink>
                       <h4>
                         {t("title")}: {topF.name}
