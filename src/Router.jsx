@@ -2,19 +2,24 @@
 import "./i18n";
 import Template from "./Template";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import React, { Suspense } from "react";
+import { useTranslation } from "react-i18next";
 
 //Import pages
-import Home from "./pages/Home";
-import Error from "./pages/Error";
-import DetailsFilm from "./components/DetailsFilm";
-import DetailPerson from "./components/DetailPerson";
-import DetailsSerial from "./components/DetailsSerial";
-import WarningLists from "./components/WarningLists";
-import PopularFilmsPages from "./pages/PopularFilmsPages";
-import PopularSerialPages from "./pages/PopularSerialPages";
 
+const Home = React.lazy(() => import("./pages/Home"));
+const Error = React.lazy(() => import("./pages/Error"));
+const DetailsFilm = React.lazy(() => import("./components/DetailsFilm"));
+const DetailPerson = React.lazy(() => import("./components/DetailPerson"));
+const DetailsSerial = React.lazy(() => import("./components/DetailsSerial"));
+const WarningLists = React.lazy(() => import("./components/WarningLists"));
+const PopularFilmsPages = React.lazy(() => import("./pages/PopularFilmsPages"));
+const PopularSerialPages = React.lazy(() =>
+  import("./pages/PopularSerialPages")
+);
 
 export default function Router() {
+  const {t} = useTranslation()
   const routing = createBrowserRouter([
     {
       path: "/",
@@ -22,39 +27,67 @@ export default function Router() {
       children: [
         {
           path: "/",
-          element: <Home />,
+          element: (
+            <Suspense fallback={<div>{t('loading')}...</div>}>
+              <Home />
+            </Suspense>
+          ),
         },
         {
           path: "/warningLists",
-          element: <WarningLists />,
+          element: (
+            <Suspense fallback={<div>{t('loading')}...</div>}>
+              <WarningLists />
+            </Suspense>
+          ),
         },
-
         {
           path: "/detailsFilm/:id",
-          element: <DetailsFilm />,
+          element: (
+            <Suspense fallback={<div>{t('loading')}...</div>}>
+              <DetailsFilm />
+            </Suspense>
+          ),
         },
-
         {
           path: "/detailsSerial/:id",
-          element: <DetailsSerial />,
+          element: (
+            <Suspense fallback={<div>{t('loading')}...</div>}>
+              <DetailsSerial />
+            </Suspense>
+          ),
         },
-
         {
           path: "/detailPerson/:id",
-          element: <DetailPerson />,
+          element: (
+            <Suspense fallback={<div>{t('loading')}...</div>}>
+              <DetailPerson />
+            </Suspense>
+          ),
         },
         {
           path: "/popularFilmsPages",
-          element: <PopularFilmsPages />,
+          element: (
+            <Suspense fallback={<div>{t('loading')}...</div>}>
+              <PopularFilmsPages />
+            </Suspense>
+          ),
         },
         {
           path: "/popularSerialPages",
-          element: <PopularSerialPages />,
+          element: (
+            <Suspense fallback={<div>{t('loading')}...</div>}>
+              <PopularSerialPages />
+            </Suspense>
+          ),
         },
-
         {
           path: "*",
-          element: <Error />,
+          element: (
+            <Suspense fallback={<div>{t('loading')}...</div>}>
+              <Error />
+            </Suspense>
+          ),
         },
       ],
     },

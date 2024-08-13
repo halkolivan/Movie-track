@@ -110,17 +110,9 @@ export default function Home() {
                           alt={topF.title}
                         />
                       </NavLink>
-                      <h4>
-                        {t("title")}: {topF.title}
-                      </h4>
+                      <h4>{topF.title}</h4>
                       <h4>
                         {t("rating")}: {topF.vote_average.toFixed(1)}
-                      </h4>
-                      <h4>
-                        {t("popularity")}: {topF.popularity.toFixed(1)}
-                      </h4>
-                      <h4>
-                        {t("voteCount")}: {topF.vote_count}
                       </h4>
                     </div>
                   </SwiperSlide>
@@ -157,17 +149,9 @@ export default function Home() {
                           alt={topF.name}
                         />
                       </NavLink>
-                      <h4>
-                        {t("title")}: {topF.name}
-                      </h4>
+                      <h4>{topF.name}</h4>
                       <h4>
                         {t("rating")}: {topF.vote_average.toFixed(1)}
-                      </h4>
-                      <h4>
-                        {t("popularity")}: {topF.popularity.toFixed(1)}
-                      </h4>
-                      <h4>
-                        {t("voteCount")}: {topF.vote_count}
                       </h4>
                     </div>
                   </SwiperSlide>
