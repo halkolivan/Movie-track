@@ -36,11 +36,11 @@ export default function PopularSerialPages() {
       }
     };
 
-    handleMediaQueryChange(mediaQuery); // Устанавливаем начальное значение
-    mediaQuery.addEventListener("change", handleMediaQueryChange); // Слушатель изменения
+    handleMediaQueryChange(mediaQuery);
+    mediaQuery.addEventListener("change", handleMediaQueryChange);
 
     return () => {
-      mediaQuery.removeEventListener("change", handleMediaQueryChange); // Удаление слушателя
+      mediaQuery.removeEventListener("change", handleMediaQueryChange);
     };
   }, []);
   useEffect(() => {
@@ -69,10 +69,10 @@ export default function PopularSerialPages() {
           <div className="films-page-content">
             {requestPopularSerial ? (
               requestPopularSerial.map((elem) => (
-                <div className="films-list" key={elem}>
+                <div className="films-list" key={elem.id}>
                   <div className="films-list-image">
                     <div className="rate">{elem.vote_average.toFixed(1)}</div>
-                    <NavLink to={`/detailsSerial/${elem.id}`} key={elem.id}>
+                    <NavLink to={`/detailsSerial/${elem.id}`}>
                       <img
                         src={
                           "https://image.tmdb.org/t/p/original/" +
@@ -87,7 +87,7 @@ export default function PopularSerialPages() {
                       {t("dataRelease")}:{elem.first_air_date}
                     </span>
                     <div className="title">{elem.name}</div>
-                    <NavLink to={`/detailsSerial/${elem.id}`} key={elem.id}>
+                    <NavLink to={`/detailsSerial/${elem.id}`}>
                       {t("moreDetailed")}
                     </NavLink>
                     <p>

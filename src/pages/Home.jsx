@@ -54,7 +54,7 @@ export default function Home() {
       } else if (width1024.matches) {
         setPageRangeDisplay(6);
       } else {
-        setPageRangeDisplay(8); // Для экранов более 1024px
+        setPageRangeDisplay(8);
       }
     };
     handleMedia();
@@ -101,7 +101,7 @@ export default function Home() {
                 getTopRateFilms.results.map((topF) => (
                   <SwiperSlide>
                     <div className="top-box" key={topF.id}>
-                      <NavLink to={`/detailsFilm/${topF.id}`} key={topF.id}>
+                      <NavLink to={`/detailsFilm/${topF.id}`}>
                         <img
                           src={
                             "https://image.tmdb.org/t/p/original/" +
@@ -138,9 +138,9 @@ export default function Home() {
               {getTopRateSerials.results &&
               getTopRateSerials.results.length > 0 ? (
                 getTopRateSerials.results.map((topF) => (
-                  <SwiperSlide>
-                    <div className="top-box" key={topF.id}>
-                      <NavLink to={`/detailsSerial/${topF.id}`} key={topF.id}>
+                  <SwiperSlide key={topF.id}>
+                    <div className="top-box">
+                      <NavLink to={`/detailsSerial/${topF.id}`}>
                         <img
                           src={
                             "https://image.tmdb.org/t/p/original/" +
@@ -197,7 +197,7 @@ export default function Home() {
                 <div className="films-list" key={movie.id}>
                   <div className="films-list-image">
                     <div className="rate">{movie.vote_average.toFixed(1)}</div>
-                    <NavLink to={`/detailsFilm/${movie.id}`} key={movie.id}>
+                    <NavLink to={`/detailsFilm/${movie.id}`} >
                       <img
                         src={
                           "https://image.tmdb.org/t/p/original/" +
@@ -238,7 +238,7 @@ export default function Home() {
                 <div className="films-list" key={serial.id}>
                   <div className="films-list-image">
                     <div className="rate">{serial.vote_average.toFixed(1)}</div>
-                    <NavLink to={`/detailsSerial/${serial.id}`} key={serial.id}>
+                    <NavLink to={`/detailsSerial/${serial.id}`} >
                       <img
                         src={
                           "https://image.tmdb.org/t/p/original/" +
