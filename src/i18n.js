@@ -16,7 +16,7 @@ i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
-    lng: "ru",
+    lng: "en",
     fallbackLng: "ru",
     debug: true,
     backend: {
